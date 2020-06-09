@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
+import Person from './Person/Person'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Hi, i am a React App</p>
+        <h1>Hi, i am a React App</h1>
+        <Person />
       </div>
     );
   }
