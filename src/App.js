@@ -11,11 +11,11 @@ class App extends Component {
     ]
   }
 
-  switchNameButtonPressed = (event) => {
+  switchNameButtonPressed = (newName) => {
     // this.state.persons[0].name = "Vinicius" -> DOESNT WORK
 
     let persons = this.state.persons
-    persons[0].name = "Vinicius"
+    persons[0].name = newName
     this.setState({
       persons
     })
@@ -25,10 +25,23 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi, i am a React App</h1>
-        <button onClick={this.switchNameButtonPressed}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>{this.state.persons[0].content}</Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>{this.state.persons[1].content}</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>{this.state.persons[2].content}</Person>
+        <button onClick={() => this.switchNameButtonPressed('Vinicius')}>Switch Name</button>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+          click={this.switchNameButtonPressed.bind(this, 'Vinicius Cechin')}>
+            {this.state.persons[0].content}
+        </Person>
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}>
+            {this.state.persons[1].content}
+        </Person>
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}>
+            {this.state.persons[2].content}
+        </Person>
       </div>
     );
   }
