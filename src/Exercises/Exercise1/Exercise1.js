@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import UserInput from './UserInput/UserInput'
+import UserOutput from './UserOutput/UserOutput'
 
 class Exercise1 extends Component {
     render() {
         return (
             <div>
-                teste exercise 1
+                <UserInput />
+                <UserOutput />
             </div>
         )
     }
