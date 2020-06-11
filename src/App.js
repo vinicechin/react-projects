@@ -46,31 +46,36 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null
+    if (this.state.persons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={this.switchNameButtonPressed.bind(this, 'Vinicius Cechin')}>
+              {this.state.persons[0].content}
+          </Person>
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            changed={this.nameChangedHandler}>
+              {this.state.persons[1].content}
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}>
+              {this.state.persons[2].content}
+          </Person>
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <h1>Hi, i am a React App</h1>
         <button style={style} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
-        { this.state.showPersons &&
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              click={this.switchNameButtonPressed.bind(this, 'Vinicius Cechin')}>
-                {this.state.persons[0].content}
-            </Person>
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              changed={this.nameChangedHandler}>
-                {this.state.persons[1].content}
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}>
-                {this.state.persons[2].content}
-            </Person>
-          </div>
-        }
+        {persons}
       </div>
     );
   }
