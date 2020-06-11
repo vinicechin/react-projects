@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Exercise1 from './Exercises/Exercise1/Exercise1'
+import Exercise2 from './Exercises/Exercise2/Exercise2'
 
 import './App.css';
 
@@ -7,7 +8,7 @@ class App extends Component {
   isExercise = true
 
   state = {
-    exercise: "1"
+    exercise: "2"
   }
 
   changeExercise = (event) => {
@@ -21,6 +22,10 @@ class App extends Component {
       case "1":
         return (
           <Exercise1 />
+        )
+      case "2":
+        return (
+          <Exercise2 />
         )
       default:
         return null
@@ -38,6 +43,7 @@ class App extends Component {
           this.isExercise &&
           <select name="exercises" id="ex-select" onChange={this.changeExercise}>
             <option value="1">Exercise 1</option>
+            <option value="2">Exercise 2</option>
           </select>
         }
         { this.isExercise && this.renderSwitch(this.state.exercise) }
