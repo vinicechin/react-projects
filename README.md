@@ -7,6 +7,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 - npm start
 - git log --graph
+- git branch -d <branch-name>
+- git push origin --delete <branch-name>
 
 
 ## Exercises
