@@ -41,7 +41,7 @@ class App extends Component {
       <div className="App">
         {
           this.isExercise &&
-          <select name="exercises" id="ex-select" onChange={this.changeExercise}>
+          <select name="exercises" id="ex-select" onChange={this.changeExercise} value={this.state.exercise}>
             <option value="1">Exercise 1</option>
             <option value="2">Exercise 2</option>
           </select>

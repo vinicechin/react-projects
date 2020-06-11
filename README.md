@@ -7,3 +7,11 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 - npm start
 - git log --graph
+
+
+## Exercises
+
+Exercises can be found on /src/Exercises/.
+
+- Exercise 1: basic elements and communication between components of react
+- Exercise 2:
