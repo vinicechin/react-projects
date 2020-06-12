@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
+import StylingReact from './Sections/StylingReact/StylingReact'
 
 import './App.css';
 
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   // #################################### RENDER METHODS ###########################################
-  
+
   renderExerciseSwitch() {
     return (
       <select name="exercises" id="ex-select" onChange={this.changeExercise} value={this.state.exercise}>
@@ -60,6 +61,7 @@ class App extends Component {
     return (
       <select name="sections" id="sec-select" onChange={this.changeSection} value={this.state.section}>
         <option value="1">Basic Features</option>
+        <option value="2">Styling React</option>
       </select>
     )
   }
@@ -69,6 +71,10 @@ class App extends Component {
       case "1":
         return (
           <BasicFeatures />
+        )
+      case "2":
+        return (
+          <StylingReact />
         )
       default:
         return null
