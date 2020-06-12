@@ -3,6 +3,17 @@
 }
 
 #ex-select {
-  margin: 15px 0px;
+  margin: 15px 0;
   width: 100px;
+}
+
+#sec-select {
+  margin: 15px 0;
+  width: 120px;
+}
+
+#content-toggle {
+  margin: 15px 0 0;
+  width: 115px;
+  text-align: center;
 }
