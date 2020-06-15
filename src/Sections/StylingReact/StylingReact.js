@@ -32,7 +32,8 @@ class StylingReact extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -59,6 +60,9 @@ class StylingReact extends Component {
           }
         </div>
       )
+
+      // change style when persons list is being shown
+      style.backgroundColor = 'red'
     }
 
     return (
