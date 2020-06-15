@@ -1,7 +1,22 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import Person from '../Person/Person'
 
 import './StylingReact.css'
+
+const StyledToggle = styled.button`
+  background-color: ${props => props.showing ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.showing ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`
 
 class StylingReact extends Component {
   state = {
@@ -33,18 +48,18 @@ class StylingReact extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black'
+    //   }
+    // }
 
     let persons = null
     if (this.state.showPersons) {
@@ -68,11 +83,11 @@ class StylingReact extends Component {
       )
 
       // change style when persons list is being shown
-      style.backgroundColor = 'red'
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // style.backgroundColor = 'red'
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
     let classes = []
@@ -85,7 +100,7 @@ class StylingReact extends Component {
       <div>
         <h1>Hi, i am a React App</h1>
         <p className={classes.join(' ')}>This should be styled dynamically</p>
-        <button style={style} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
+        <StyledToggle showing={this.state.showPersons} onClick={this.togglePersonsButtonPressed}>Toggle Persons</StyledToggle>
         {persons}
       </div>
     );

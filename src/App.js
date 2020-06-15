@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
