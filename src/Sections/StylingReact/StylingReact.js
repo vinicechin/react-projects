@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Radium from 'radium'
 import Person from '../Person/Person'
 
 import './StylingReact.css'
@@ -39,7 +40,11 @@ class StylingReact extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let persons = null
@@ -65,6 +70,10 @@ class StylingReact extends Component {
 
       // change style when persons list is being shown
       style.backgroundColor = 'red'
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     let classes = []
@@ -84,4 +93,4 @@ class StylingReact extends Component {
   }
 }
 
-export default StylingReact;
+export default Radium(StylingReact);
