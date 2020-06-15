@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Person from '../Person/Person'
 
+import './StylingReact.css'
+
 class StylingReact extends Component {
   state = {
     persons: [
@@ -65,9 +67,16 @@ class StylingReact extends Component {
       style.backgroundColor = 'red'
     }
 
+    let classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('red')
+      if (this.state.persons.length <= 1) classes.push('bold')
+    }
+
     return (
       <div>
         <h1>Hi, i am a React App</h1>
+        <p className={classes.join(' ')}>This should be styled dynamically</p>
         <button style={style} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
         {persons}
       </div>
