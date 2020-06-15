@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Person from '../Person/Person'
 
-import './StylingReact.css'
+import styles from './StylingReact.module.css'
 
 class StylingReact extends Component {
   state = {
@@ -33,6 +33,7 @@ class StylingReact extends Component {
   }
 
   render() {
+    let btnClass = [styles.Button]
     let persons = null
     if (this.state.showPersons) {
       persons = (
@@ -54,25 +55,20 @@ class StylingReact extends Component {
         </div>
       )
 
-      // change style when persons list is being shown
-      // style.backgroundColor = 'red'
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
+      btnClass.push(styles.Red)
     }
 
     let classes = []
     if (this.state.persons.length <= 2) {
-      classes.push('red')
-      if (this.state.persons.length <= 1) classes.push('bold')
+      classes.push(styles.red)
+      if (this.state.persons.length <= 1) classes.push(styles.bold)
     }
 
     return (
       <div>
         <h1>Hi, i am a React App</h1>
         <p className={classes.join(' ')}>This should be styled dynamically</p>
-        <button className="button" onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
+        <button className={btnClass.join(' ')} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
         {persons}
       </div>
     );
