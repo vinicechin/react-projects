@@ -3,12 +3,13 @@ import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
 import StylingReact from './Sections/StylingReact/StylingReact'
+import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
 
 import './App.css';
 
 class App extends Component {
   state = {
-    section: "2",
+    section: "3",
     exercise: "2",
     isExercise: false
   }
@@ -62,6 +63,7 @@ class App extends Component {
       <select name="sections" id="sec-select" onChange={this.changeSection} value={this.state.section}>
         <option value="1">Basic Features</option>
         <option value="2">Styling React</option>
+        <option value="3">Error Boundaries</option>
       </select>
     )
   }
@@ -75,6 +77,10 @@ class App extends Component {
       case "2":
         return (
           <StylingReact />
+        )
+      case "3":
+        return (
+          <ErrorBoundaries />
         )
       default:
         return null
