@@ -3,6 +3,15 @@ import Persons from '../SharedComponents/Persons/Persons'
 import Cockpit from '../SharedComponents/Cockpit/Cockpit'
 
 class AdvancedFeatures extends Component {
+
+  // ############################## CONSTRUCTOR LIFECYCLE #####################################
+  // if props are needed to set the initial state, do it here
+  constructor(props) {
+    super(props)
+    console.log('[AdvancedFeatures] constructor')
+  }
+
+  // this new state declaration is added to the contructor lifecycle behind the scenes
   state = {
     persons: [
       {id: 'p0', name: "Vini", age: 31, content: ""},
@@ -11,6 +20,40 @@ class AdvancedFeatures extends Component {
     ],
     showPersons: false
   }
+
+  // used to prepare the state before mounting the component, not used very often
+  // static getDerivedStateFromProps(props, state) {
+  //   return state
+  // }
+
+  // used to execute procedures that can generate side-effects, like http calls
+  componentDidMount() {
+    // console.log('[AdvancedFeatures] componentDidMount')
+  }
+
+  // ########################## LIFECYCLE FOR PROPS AND STATE CHANGE ###########################
+  // used to decide if component should update. return boolean
+  shouldComponentUpdate(nextProps, nextState) {
+    return true
+  }
+  
+  // last minute changes before update
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return { message: 'Snapshot works' }
+  }
+
+  // used to execute procedures after an update of the DOM
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // console.log('[AdvancedFeatures] componentDidUpdate')
+    // console.log(snapshot)
+  }
+
+  // ############################### LIFECYCLE FOR CLEAN-UP #####################################
+  componentWillUnmount() {
+    //clean up stuff
+  }
+
+  // ################################## MAIN COMPONENT ##########################################
 
   nameChangedHandler = (index, event) => {
     let persons = [...this.state.persons]
