@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Person from '../SharedComponents/Person/Person'
 
-class BasicFeatures extends Component {
+import styles from './AdvancedFeatures.module.css'
+
+class AdvancedFeatures extends Component {
   state = {
     persons: [
       {id: 'p0', name: "Vini", age: 31, content: ""},
@@ -31,14 +33,7 @@ class BasicFeatures extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
+    let btnClass = [styles.Button]
     let persons = null
     if (this.state.showPersons) {
       persons = (
@@ -59,16 +54,25 @@ class BasicFeatures extends Component {
           }
         </div>
       )
+
+      btnClass.push(styles.Red)
+    }
+
+    let classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push(styles.red)
+      if (this.state.persons.length <= 1) classes.push(styles.bold)
     }
 
     return (
       <div>
         <h1>Hi, i am a React App</h1>
-        <button style={style} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
+        <p className={classes.join(' ')}>This should be styled dynamically</p>
+        <button className={btnClass.join(' ')} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
         {persons}
       </div>
     );
   }
 }
 
-export default BasicFeatures;
+export default AdvancedFeatures;

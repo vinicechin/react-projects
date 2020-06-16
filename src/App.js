@@ -4,6 +4,7 @@ import Exercise2 from './Exercises/Exercise2/Exercise2'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
 import StylingReact from './Sections/StylingReact/StylingReact'
 import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
+import AdvancedFeatures from './Sections/AdvancedFeatures/AdvancedFeatures'
 
 import './App.css';
 
@@ -64,6 +65,7 @@ class App extends Component {
         <option value="1">Basic Features</option>
         <option value="2">Styling React</option>
         <option value="3">Error Boundaries</option>
+        <option value="4">Advanced Features</option>
       </select>
     )
   }
@@ -81,6 +83,10 @@ class App extends Component {
       case "3":
         return (
           <ErrorBoundaries />
+        )
+      case "4":
+        return (
+          <AdvancedFeatures />
         )
       default:
         return null
