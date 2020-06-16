@@ -10,7 +10,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    section: "3",
+    section: "4",
     exercise: "2",
     isExercise: false
   }

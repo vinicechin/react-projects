@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import Person from '../SharedComponents/Person/Person'
-
-import styles from './AdvancedFeatures.module.css'
+import Persons from '../SharedComponents/Persons/Persons'
+import Cockpit from '../SharedComponents/Cockpit/Cockpit'
 
 class AdvancedFeatures extends Component {
   state = {
@@ -33,42 +32,14 @@ class AdvancedFeatures extends Component {
   }
 
   render() {
-    let btnClass = [styles.Button]
     let persons = null
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {
-            this.state.persons.map((person, index) => {
-              return (
-                <Person
-                  click={this.deletePersonHandler.bind(this, index)}
-                  changed={this.nameChangedHandler.bind(this, index)}
-                  key={person.id}
-                  name={person.name}
-                  age={person.age}>
-                    {person.content}
-                </Person>
-              )
-            })
-          }
-        </div>
-      )
-
-      btnClass.push(styles.Red)
-    }
-
-    let classes = []
-    if (this.state.persons.length <= 2) {
-      classes.push(styles.red)
-      if (this.state.persons.length <= 1) classes.push(styles.bold)
+      persons = <Persons persons={this.state.persons} clicked={this.deletePersonHandler} changed={this.nameChangedHandler} />
     }
 
     return (
       <div>
-        <h1>Hi, i am a React App</h1>
-        <p className={classes.join(' ')}>This should be styled dynamically</p>
-        <button className={btnClass.join(' ')} onClick={this.togglePersonsButtonPressed}>Toggle Persons</button>
+        <Cockpit showPersons={this.state.showPersons} persons={this.state.persons} clicked={this.togglePersonsButtonPressed} />
         {persons}
       </div>
     );

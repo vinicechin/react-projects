@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Person from '../SharedComponents/Person/Person'
+import Person from '../SharedComponents/Persons/Person/Person'
 
 import styles from './StylingReact.module.css'
 
