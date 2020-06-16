@@ -86,7 +86,7 @@ class App extends Component {
         )
       case "4":
         return (
-          <AdvancedFeatures />
+          <AdvancedFeatures title="Advanced Features" />
         )
       default:
         return null
