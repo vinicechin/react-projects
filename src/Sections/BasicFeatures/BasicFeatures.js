@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import Person from '../SharedComponents/Persons/Person/Person'
+import Person from '../shared/components/Persons/Person/Person'
 
 class BasicFeatures extends Component {
   state = {
     persons: [
       {id: 'p0', name: "Vini", age: 31, content: ""},
       {id: 'p1', name: "Gabi", age: 25, content: "Fofa e linda"},
-      {id: 'p2', name: "Pingo", age: "todos", content: "Fofo e ticudo"},
+      {id: 'p2', name: "Pingo", age: 14, content: "Fofo e ticudo"},
     ],
     showPersons: false
   }

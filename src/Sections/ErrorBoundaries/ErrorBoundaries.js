@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
-import Person from '../SharedComponents/Persons/Person/Person'
+import Person from '../shared/components/Persons/Person/Person'
 
 class ErrorBoundaries extends Component {
     state = {

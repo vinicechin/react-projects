@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Persons from '../SharedComponents/Persons/Persons'
-import Cockpit from '../SharedComponents/Cockpit/Cockpit'
-import AuthContext from '../context/auth-context'
+import Persons from '../shared/components/Persons/Persons'
+import Cockpit from '../shared/components/Cockpit/Cockpit'
+import AuthContext from '../shared/context/auth-context'
 
 class AdvancedFeatures extends Component {
 
