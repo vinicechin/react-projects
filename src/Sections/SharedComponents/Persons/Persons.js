@@ -1,11 +1,16 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Person from './Person/Person'
 
-class Persons extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    // compare refs of person (is crating a new one on update)
-    return nextProps.persons !== this.props.persons
-  }
+// PureComponent is a Component with a shouldComponentUpdate check of all props and verify if any has changed
+class Persons extends PureComponent {
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // compare refs of person (is crating a new one on update) and passed methods
+  //   return (
+  //     nextProps.persons !== this.props.persons ||
+  //     nextProps.changed !== this.props.changed ||
+  //     nextProps.clicked !== this.props.clicked
+  //   )
+  // }
 
   render() {
     return this.props.persons.map((person, index) => {
