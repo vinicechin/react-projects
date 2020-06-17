@@ -126,6 +126,7 @@ class App extends Component {
           !this.state.isExercise &&
           <div>
             { this.renderSectionSwitch() }
+            <hr style={{width: '80%'}} />
             { this.renderSection(this.state.section) }
           </div>
         }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Blog from './Blog/Blog'
+import Blog from '../shared/components/Blog/Blog'
 
 const ReachingWeb = () => {
   return (

@@ -1,7 +1,8 @@
 import React from 'react'
+import Blog from '../shared/components/Blog/Blog'
 
 const Routing = () => {
-    return <div />
+    return <Blog />
 }
 
 export default Routing
