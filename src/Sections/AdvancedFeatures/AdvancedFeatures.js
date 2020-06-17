@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Persons from '../SharedComponents/Persons/Persons'
 import Cockpit from '../SharedComponents/Cockpit/Cockpit'
+import AuthContext from '../context/auth-context'
 
 class AdvancedFeatures extends Component {
 
@@ -101,7 +102,12 @@ class AdvancedFeatures extends Component {
     }
 
     return (
-      <div>
+      <AuthContext.Provider
+        value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler
+        }}
+      >
         <Cockpit
           title={this.props.title}
           showPersons={this.state.showPersons}
@@ -110,7 +116,7 @@ class AdvancedFeatures extends Component {
           login={this.loginHandler}
         />
         {persons}
-      </div>
+      </AuthContext.Provider>
     );
   }
 }
