@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
@@ -6,12 +7,13 @@ import StylingReact from './Sections/StylingReact/StylingReact'
 import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
 import AdvancedFeatures from './Sections/AdvancedFeatures/AdvancedFeatures'
 import ReachingWeb from './Sections/ReachingWeb/ReachingWeb'
+import Routing from './Sections/Routing/Routing'
 
 import './App.css';
 
 class App extends Component {
   state = {
-    section: "5",
+    section: "6",
     exercise: "2",
     isExercise: false
   }
@@ -68,6 +70,7 @@ class App extends Component {
         <option value="3">Error Boundaries</option>
         <option value="4">Advanced Features</option>
         <option value="5">Reaching Web</option>
+        <option value="6">Routing</option>
       </select>
     )
   }
@@ -93,6 +96,10 @@ class App extends Component {
       case "5":
         return (
           <ReachingWeb />
+        )
+      case "6":
+        return (
+          <Routing />
         )
       default:
         return null
