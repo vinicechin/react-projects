@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import AuthContext from '../../context/auth-context'
 
 import styles from './Cockpit.module.css'
@@ -26,6 +26,7 @@ const Cockpit = (props) => {
     }, [])
 
     const toggleBtnRef = useRef(null)
+    const authContext = useContext(AuthContext)
     const classes = []
     let btnClass = ''
 
@@ -43,9 +44,7 @@ const Cockpit = (props) => {
             <h1>{props.title}</h1>
             <p className={classes.join(' ')}>This should be styled dynamically</p>
             <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>Toggle Persons</button>
-            <AuthContext.Consumer>
-                {(context) => <button onClick={context.login}>Log In</button>}
-            </AuthContext.Consumer>
+            <button onClick={authContext.login}>Log In</button>
         </div>
     )
 }
