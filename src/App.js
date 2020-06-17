@@ -11,7 +11,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    section: "4",
+    section: "5",
     exercise: "2",
     isExercise: false
   }
