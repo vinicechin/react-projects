@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import Post from './Post/Post'
 import './Posts.css'
 
 class Posts extends Component {
     state = {
-        posts: [],
-        selectedPostId: null
+        posts: []
     }
 
     componentDidMount() {
@@ -26,19 +26,15 @@ class Posts extends Component {
             })
     }
 
-    postClickedHandler = (id) => {
-        this.setState({selectedPostId: id})
-    }
-
     render() {
         const posts = this.state.posts.map(post => {
             return (
-                <Post
-                    key={post.id}
-                    title={post.title}
-                    author={post.author}
-                    clicked={this.postClickedHandler.bind(this, post.id)}
-                />
+                <Link to={'/' + post.id} key={post.id} >
+                    <Post
+                        title={post.title}
+                        author={post.author}
+                    />
+                </Link>
             )
         })
 
