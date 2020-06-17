@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import styles from "./Person.module.css"
 
@@ -21,6 +22,13 @@ const person = (props) => {
         <p>{ props.children }</p>
         <input type="text" value={props.name} onChange={props.changed} />
     </div>
+}
+
+person.propTypes = {
+    click: PropTypes.func,
+    changed: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number
 }
 
 export default person
