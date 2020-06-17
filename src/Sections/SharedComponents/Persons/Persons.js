@@ -12,6 +12,16 @@ class Persons extends PureComponent {
   //   )
   // }
 
+  // Example on how to add ref to class based component
+  // constructor(props) {
+  //   super(props)
+  //   this.personElementRef = React.createRef()
+  // }
+
+  // componentDidMount() {
+  //   this.personElementRef.current.focus()
+  // }
+
   render() {
     return this.props.persons.map((person, index) => {
       return (

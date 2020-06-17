@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import styles from './Cockpit.module.css'
 
@@ -20,6 +20,11 @@ const Cockpit = (props) => {
         // }
     }, [props.personsLength])
 
+    useEffect(() => {
+        toggleBtnRef.current.click()
+    }, [])
+
+    const toggleBtnRef = useRef(null)
     const classes = []
     let btnClass = ''
 
@@ -36,7 +41,7 @@ const Cockpit = (props) => {
         <div className={styles.Cockpit}>
             <h1>{props.title}</h1>
             <p className={classes.join(' ')}>This should be styled dynamically</p>
-            <button className={btnClass} onClick={props.clicked}>Toggle Persons</button>
+            <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>Toggle Persons</button>
         </div>
     )
 }
