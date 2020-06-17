@@ -19,7 +19,8 @@ class AdvancedFeatures extends Component {
       {id: 'p2', name: "Pingo", age: 14, content: "Fofo e ticudo"},
     ],
     showPersons: false,
-    changesCount: 0
+    changesCount: 0,
+    authenticated: false
   }
 
   // used to prepare the state before mounting the component, not used very often
@@ -82,10 +83,21 @@ class AdvancedFeatures extends Component {
     this.setState({persons})
   }
 
+  loginHandler = () => {
+    this.setState({ authenticated: true })
+  }
+
   render() {
     let persons = null
     if (this.state.showPersons) {
-      persons = <Persons persons={this.state.persons} clicked={this.deletePersonHandler} changed={this.nameChangedHandler} />
+      persons = (
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated}
+        />
+      )
     }
 
     return (
@@ -95,6 +107,7 @@ class AdvancedFeatures extends Component {
           showPersons={this.state.showPersons}
           personsLength={this.state.persons.length}
           clicked={this.togglePersonsButtonPressed}
+          login={this.loginHandler}
         />
         {persons}
       </div>

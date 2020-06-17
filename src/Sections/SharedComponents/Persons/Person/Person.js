@@ -18,6 +18,7 @@ const person = (props) => {
     //There is also React.Fragment, that does the same as above
 
     return <div className={styles.Person}>
+        {props.isAuth ? <p>Authenticated</p> : <p>Please Log in</p>}
         <p onClick={props.click}>I'm a { props.name }! and i am { props.age } years old</p>
         <p>{ props.children }</p>
         <input type="text" value={props.name} onChange={props.changed} />
