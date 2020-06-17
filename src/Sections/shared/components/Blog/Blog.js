@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route, NavLink } from 'react-router-dom'
 
 import Posts from './Posts/Posts'
 import NewPost from './NewPost/NewPost'
@@ -12,16 +12,17 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
+                            <li><NavLink to="/" exact activeClassName="active" >Home</NavLink></li>
 
                             {/* hash to jump to that part of the url */}
-                            <li><Link to={{
+                            <li><NavLink to={{
+                                // pathname: this.props.match.url + '/new-post', -> relative path example, doesnt work here because there is no props
                                 pathname: "/new-post",
                                 hash: '#submit',
                                 search: '?quick-submit=true'
                             }}>
                                 New Post
-                            </Link></li>
+                            </NavLink></li>
                         </ul>
                     </nav>
                 </header>
