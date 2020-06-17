@@ -18,7 +18,8 @@ class AdvancedFeatures extends Component {
       {id: 'p1', name: "Gabi", age: 25, content: "Fofa e linda"},
       {id: 'p2', name: "Pingo", age: "todos", content: "Fofo e ticudo"},
     ],
-    showPersons: false
+    showPersons: false,
+    changesCount: 0
   }
 
   // used to prepare the state before mounting the component, not used very often
@@ -58,7 +59,14 @@ class AdvancedFeatures extends Component {
   nameChangedHandler = (index, event) => {
     let persons = [...this.state.persons]
     persons[index].name = event.target.value
-    this.setState({ persons })
+
+    //Update state when depending on old state (setState is not sinc)
+    this.setState((oldState, props) => {
+      return {
+        persons,
+        changesCount: oldState.changesCount + 1
+      }
+    })
   }
 
   togglePersonsButtonPressed = () => {

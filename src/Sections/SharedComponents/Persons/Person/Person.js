@@ -14,6 +14,7 @@ const person = (props) => {
     //     <p>{ props.children }</p>
     //     <input type="text" value={props.name} onChange={props.changed} />
     // </>
+    //There is also React.Fragment, that does the same as above
 
     return <div className={styles.Person}>
         <p onClick={props.click}>I'm a { props.name }! and i am { props.age } years old</p>
