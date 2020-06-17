@@ -23,6 +23,9 @@ class Blog extends Component {
                 })
                 this.setState({ posts })
             })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     postClickedHandler = (id) => {
