@@ -5,6 +5,7 @@ import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
 import StylingReact from './Sections/StylingReact/StylingReact'
 import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
 import AdvancedFeatures from './Sections/AdvancedFeatures/AdvancedFeatures'
+import ReachingWeb from './Sections/ReachingWeb/ReachingWeb'
 
 import './App.css';
 
@@ -66,6 +67,7 @@ class App extends Component {
         <option value="2">Styling React</option>
         <option value="3">Error Boundaries</option>
         <option value="4">Advanced Features</option>
+        <option value="5">Reaching Web</option>
       </select>
     )
   }
@@ -87,6 +89,10 @@ class App extends Component {
       case "4":
         return (
           <AdvancedFeatures title="Advanced Features" />
+        )
+      case "5":
+        return (
+          <ReachingWeb />
         )
       default:
         return null
