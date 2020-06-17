@@ -85,7 +85,7 @@ class AdvancedFeatures extends Component {
         <Cockpit
           title={this.props.title}
           showPersons={this.state.showPersons}
-          persons={this.state.persons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonsButtonPressed}
         />
         {persons}

@@ -18,7 +18,7 @@ const Cockpit = (props) => {
         //     //clean up stuff
         //     clearTimeout(timer)
         // }
-    }, [props.persons])
+    }, [props.personsLength])
 
     const classes = []
     let btnClass = ''
@@ -27,9 +27,9 @@ const Cockpit = (props) => {
         btnClass = styles.Red
     }
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
       classes.push(styles.red)
-      if (props.persons.length <= 1) classes.push(styles.bold)
+      if (props.personsLength <= 1) classes.push(styles.bold)
     }
 
     return (
@@ -41,4 +41,4 @@ const Cockpit = (props) => {
     )
 }
 
-export default Cockpit
+export default React.memo(Cockpit)
