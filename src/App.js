@@ -9,12 +9,13 @@ import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
 import AdvancedFeatures from './Sections/AdvancedFeatures/AdvancedFeatures'
 import ReachingWeb from './Sections/ReachingWeb/ReachingWeb'
 import Routing from './Sections/Routing/Routing'
+import ReduxSection from './Sections/ReduxSection/ReduxSection'
 
 import './App.css';
 
 class App extends Component {
   state = {
-    section: "6",
+    section: "7",
     exercise: "2",
     isExercise: false
   }
@@ -72,6 +73,7 @@ class App extends Component {
         <option value="4">Advanced Features</option>
         <option value="5">Reaching Web</option>
         <option value="6">Routing</option>
+        <option value="7">Redux</option>
       </select>
     )
   }
@@ -101,6 +103,10 @@ class App extends Component {
       case "6":
         return (
           <Routing />
+        )
+      case "7":
+        return (
+          <ReduxSection />
         )
       default:
         return null
