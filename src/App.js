@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
@@ -10,8 +12,11 @@ import AdvancedFeatures from './Sections/AdvancedFeatures/AdvancedFeatures'
 import ReachingWeb from './Sections/ReachingWeb/ReachingWeb'
 import Routing from './Sections/Routing/Routing'
 import ReduxSection from './Sections/ReduxSection/ReduxSection'
+import reducer from './Sections/shared/store/reducer'
 
 import './App.css';
+
+const store = createStore(reducer)
 
 class App extends Component {
   state = {
@@ -106,7 +111,9 @@ class App extends Component {
         )
       case "7":
         return (
-          <ReduxSection />
+          <Provider store={store}>
+            <ReduxSection />
+          </Provider>
         )
       default:
         return null
