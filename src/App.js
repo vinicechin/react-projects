@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
@@ -112,25 +113,27 @@ class App extends Component {
     const buttomText = this.state.isExercise ? "Go to Classes" : "Go to Exercises"
 
     return (
-      <div className="App">
-        <button id="content-toggle" onClick={this.toggleContent}>{buttomText}</button>
-        <br />
-        {
-          this.state.isExercise &&
-          <div>
-            { this.renderExerciseSwitch() }
-            { this.renderExercise(this.state.exercise) }
-          </div>
-        }
-        {
-          !this.state.isExercise &&
-          <div>
-            { this.renderSectionSwitch() }
-            <hr style={{width: '80%'}} />
-            { this.renderSection(this.state.section) }
-          </div>
-        }
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <button id="content-toggle" onClick={this.toggleContent}>{buttomText}</button>
+          <br />
+          {
+            this.state.isExercise &&
+            <div>
+              { this.renderExerciseSwitch() }
+              { this.renderExercise(this.state.exercise) }
+            </div>
+          }
+          {
+            !this.state.isExercise &&
+            <div>
+              { this.renderSectionSwitch() }
+              <hr style={{width: '80%'}} />
+              { this.renderSection(this.state.section) }
+            </div>
+          }
+        </div>
+      </BrowserRouter>
     );
   }
 }
