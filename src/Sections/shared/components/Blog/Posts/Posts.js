@@ -29,7 +29,7 @@ class Posts extends Component {
     }
 
     postClickedHandler = (id) => {
-        this.props.history.push({ pathname: '/posts/' + id })
+        this.props.history.push({ pathname: this.props.match.url+ '/' + id })
     }
 
     render() {
