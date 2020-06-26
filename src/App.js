@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, NavLink, Switch, Route, Redirect } from 'react-router-dom'
 
+import Project from './Project/Project'
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
@@ -124,9 +125,7 @@ class App extends Component {
             {/** Project route */}
             <Route path="/project" exact>
               <hr style={{width: '80%'}} />
-              <div>
-                Project
-              </div>
+              <Project />
             </Route>
           </Switch>
         </div>
