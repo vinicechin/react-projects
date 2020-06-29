@@ -47,6 +47,15 @@ const sections = [
     title: "Redux" }
 ]
 
+const navBar = [
+  { title: 'Exercises',
+    path: '/exercises' },
+  { title: 'Sections',
+    path: '/sections' },
+  { title: 'Project',
+    path: '/project' }
+]
+
 class App extends Component {
   changeExercise = (history, event) => {
     history.push("/exercises/" + event.target.value)
@@ -61,10 +70,18 @@ class App extends Component {
     return (
       <header>
         <nav>
-          <ul>
-            <li><NavLink to={"/exercises"}>Exercises</NavLink></li>
-            <li><NavLink to={"/sections"}>Sections</NavLink></li>
-            <li><NavLink to={"/project"}>Project</NavLink></li>
+          <ul className="AppNav">
+            {
+              navBar.map((item) => {
+                return (
+                  <li className="AppNavItem" key={item.path}>
+                    <NavLink className="AppNavLink" to={item.path}>
+                      {item.title}
+                    </NavLink>
+                  </li>
+                )
+              })
+            }
           </ul>
         </nav>
       </header>

@@ -18,18 +18,18 @@
   text-align: center;
 }
 
-.App ul {
+.App .AppNav {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.App li {
+.App .AppNavItem {
   display: inline-block;
   margin: 20px;
 }
 
-.App a {
+.App .AppNavLink {
   text-decoration: none;
   color: black;
 }
