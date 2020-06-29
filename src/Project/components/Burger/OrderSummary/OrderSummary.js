@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button, { btnTypes } from '../../UI/Button/Button'
+
 const OrderSummary = (props) => {
     const ingredientsSummary = Object.keys(props.ingredients)
         .map((type) => {
@@ -14,12 +16,12 @@ const OrderSummary = (props) => {
         <>
             <h3>Your Order</h3>
             <p>A delicious burger with the following ingredients:</p>
-            <ul>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
                 {ingredientsSummary}
             </ul>
             <p>Continue to Checkout?</p>
-            <button>CANCEL</button>
-            <button>CONTINUE</button>
+            <Button type={btnTypes.danger} clicked={props.purchaseCancelled} >CANCEL</Button>
+            <Button type={btnTypes.success} clicked={props.purchaseContinued} >CONTINUE</Button>
         </>
     );
 }
