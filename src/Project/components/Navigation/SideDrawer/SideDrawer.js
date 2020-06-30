@@ -1,17 +1,28 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import classes from './SideDrawer.module.css'
 import Logo from '../../Logo/Logo'
 import NavigationItems from '../NavigationItems/NavigationItems'
+import Backdrop from '../../UI/Backdrop/Backdrop'
 
 const SideDrawer = (props) => {
+    const backDropClasses = classNames({
+        [classes.SideDrawer]: true,
+        [classes.Close]: !props.open,
+        [classes.Open]: props.open,
+    })
+    
     return (
-        <div className={classes.SideDrawer} >
-            <Logo height="11%" />
-            <nav style={{ marginTop: '32px' }} >
-                <NavigationItems />
-            </nav>
-        </div>
+        <>
+            <Backdrop show={props.open} clicked={props.closed} />
+            <div className={backDropClasses} >
+                <Logo height="11%" />
+                <nav style={{ marginTop: '32px' }} >
+                    <NavigationItems />
+                </nav>
+            </div>
+        </>
     )
 }
  
