@@ -6,7 +6,7 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
 class Project extends Component {
     render() {
         return (
-            <div>
+            <div style={{ textAlign: 'left' }}>
                 <Layout>
                     <BurgerBuilder />
                 </Layout>
