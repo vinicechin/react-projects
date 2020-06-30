@@ -14,7 +14,7 @@ import ReduxSection from './Sections/ReduxSection/ReduxSection'
 
 import './App.css';
 
-const exercises = [
+const EXERCISES = [
   { component: <Exercise1 />,
     value: 1,
     title: "Exercise 1" },
@@ -23,7 +23,7 @@ const exercises = [
     title: "Exercise 2" }
 ]
 
-const sections = [
+const SECTIONS = [
   { component: <BasicFeatures />,
     value: 1,
     title: "Basic Features" },
@@ -47,7 +47,7 @@ const sections = [
     title: "Redux" }
 ]
 
-const navBar = [
+const NAVBAR = [
   { title: 'Exercises',
     path: '/exercises' },
   { title: 'Sections',
@@ -68,11 +68,11 @@ class App extends Component {
   //*********************** RENDERS ************************** */
   renderHeaderNav() {
     return (
-      <header>
+      <header className="AppHeader">
         <nav>
           <ul className="AppNav">
             {
-              navBar.map((item) => {
+              NAVBAR.map((item) => {
                 return (
                   <li className="AppNavItem" key={item.path}>
                     <NavLink className="AppNavLink" to={item.path}>
@@ -92,7 +92,7 @@ class App extends Component {
     return (
       <select name="exercises" id="ex-select" onChange={this.changeExercise.bind(this, history)} value={match.params.id}>
         {
-          exercises.map((exercise) => {
+          EXERCISES.map((exercise) => {
             return <option key={exercise.value} value={exercise.value}>{exercise.title}</option>
           })
         }
@@ -104,7 +104,7 @@ class App extends Component {
     return (
       <select name="sections" id="sec-select" onChange={this.changeSection.bind(this, history)} value={match.params.id}>
         {
-          sections.map((section) => {
+          SECTIONS.map((section) => {
             return <option key={section.value} value={section.value}>{section.title}</option>
           })
         }
@@ -125,7 +125,7 @@ class App extends Component {
               return <>
                 { this.renderExerciseSwitch(props) }
                 <hr style={{width: '80%'}} />
-                { exercises[props.match.params.id-1].component }
+                { EXERCISES[props.match.params.id-1].component }
               </>
             }} />
 
@@ -135,7 +135,7 @@ class App extends Component {
               return <>
                 { this.renderSectionSwitch(props) }
                 <hr style={{width: '80%'}} />
-                { sections[props.match.params.id-1].component }
+                { SECTIONS[props.match.params.id-1].component }
               </>
             }} />
 

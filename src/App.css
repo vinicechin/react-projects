@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin-top: 56px;
 }
 
 #ex-select {
@@ -16,6 +17,16 @@
   margin: 15px 0 0;
   width: 115px;
   text-align: center;
+}
+
+.App .AppHeader {
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  background-color: #EFEFEF;
 }
 
 .App .AppNav {
