@@ -13,8 +13,8 @@ class Courses extends Component {
         ]
     }
 
-    courseClickedHandler = (id) => {
-        this.props.history.push(`${this.props.match.url}/${id}`)
+    courseClickedHandler = (id, title) => {
+        this.props.history.push(`${this.props.match.url}/${id}?title=${title}`)
     }
 
     render () {
@@ -28,14 +28,14 @@ class Courses extends Component {
                                 <article
                                     className="Course"
                                     key={course.id}
-                                    onClick={this.courseClickedHandler.bind(this, course.id)} >
+                                    onClick={this.courseClickedHandler.bind(this, course.id, course.title)} >
                                     {course.title}
                                 </article>
                             )
                         } )
                     }
                 </section>
-                <Route path={this.props.match.url + '/:id'} exact component={Course} />
+                <Route path={`${this.props.match.url}/:id`} exact component={Course} />
             </div>
         );
     }
