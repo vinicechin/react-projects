@@ -4,6 +4,7 @@ import { BrowserRouter, NavLink, Switch, Route, Redirect } from 'react-router-do
 import Project from './Project/Project'
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
+import Exercise3 from './Exercises/Exercise3/Exercise3'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
 import StylingReact from './Sections/StylingReact/StylingReact'
 import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
@@ -20,7 +21,10 @@ const EXERCISES = [
     title: "Exercise 1" },
   { component: <Exercise2 />,
     value: 2,
-    title: "Exercise 2" }
+    title: "Exercise 2" },
+  { component: <Exercise3 />,
+    value: 3,
+    title: "Exercise 3" }
 ]
 
 const SECTIONS = [
