@@ -16,16 +16,23 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
     state = {
-        ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingredients: null,
         total: 0,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
+    }
+
+    componentDidMount() {
+        axios.get('/ingredients.json')
+            .then(({ data }) => {
+                this.setState({ingredients: data})
+            })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ error: true })
+            })
     }
 
     updatePurchasable(ingredients) {
@@ -87,6 +94,7 @@ class BurgerBuilder extends Component {
                 this.setState({ loading: false, purchasing: false })
             })
             .catch(error => {
+                alert(error)
                 this.setState({ loading: false, purchasing: false })
             })
     }
@@ -94,6 +102,7 @@ class BurgerBuilder extends Component {
     renderModal() {
         const modalContent = this.state.loading ?
             <Spinner /> :
+            this.state.ingredients &&
             <OrderSummary
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler}
@@ -108,14 +117,14 @@ class BurgerBuilder extends Component {
         )
     }
 
-    render() {
+    renderBurger() {
         const disabled = { ...this.state.ingredients }
         for (let key in disabled) {
             disabled[key] = disabled[key] <= 0
         }
-        return (
-            <>
-                {this.renderModal()}
+
+        return this.state.ingredients ?
+            (<>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
@@ -125,6 +134,15 @@ class BurgerBuilder extends Component {
                     price={this.state.total}
                     purchasable={this.state.purchasable}
                 />
+            </>) :
+            this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />
+    }
+
+    render() {
+        return (
+            <>
+                {this.renderModal()}
+                {this.renderBurger()}
             </>
         )
     }
