@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Layout from './components/Layout/Layout'
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
+import Checkout from './containers/Checkout/Checkout'
 
 class Project extends Component {
     render() {
@@ -9,6 +10,7 @@ class Project extends Component {
             <div style={{ textAlign: 'left' }}>
                 <Layout>
                     <BurgerBuilder />
+                    <Checkout />
                 </Layout>
             </div>
         )
