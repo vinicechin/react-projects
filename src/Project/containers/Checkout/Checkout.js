@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import queryString from 'query-string'
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
+import ContactData from './ContactData/ContactData'
 
 class Checkout extends Component {
     state = {
@@ -23,10 +25,10 @@ class Checkout extends Component {
     }
 
     checkoutContinuedHandler = () => {
-        this.props.history.replace(`${this.props.match.url}/contact-data'`)
+        this.props.history.push(`${this.props.match.url}/contact-data`)
     }
 
-    render() { 
+    render() {
         return (
             <div>
                 <CheckoutSummary
@@ -34,6 +36,7 @@ class Checkout extends Component {
                     cancelled={this.checkoutCancelledHandler}
                     continued={this.checkoutContinuedHandler}
                 />
+                <Route path={`${this.props.match.url}/contact-data`} exact component={ContactData} />
             </div>
         )
     }
