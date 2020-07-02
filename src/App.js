@@ -144,7 +144,7 @@ class App extends Component {
             }} />
 
             {/** Project route */}
-            <Route path="/project" exact>
+            <Route path="/project">
               <hr style={{width: '80%'}} />
               <Project />
             </Route>

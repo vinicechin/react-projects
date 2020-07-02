@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Switch, Route, withRouter } from 'react-router-dom'
 
 import Layout from './components/Layout/Layout'
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
@@ -9,12 +10,14 @@ class Project extends Component {
         return (
             <div style={{ textAlign: 'left' }}>
                 <Layout>
-                    <BurgerBuilder />
-                    <Checkout />
+                    <Switch>
+                        <Route path={`${this.props.match.url}/checkout`} component={Checkout} />
+                        <Route path={this.props.match.url} exact component={BurgerBuilder} />
+                    </Switch>
                 </Layout>
             </div>
         )
     }
 }
 
-export default Project
+export default withRouter(Project)
