@@ -13,7 +13,7 @@ import ReachingWeb from './Sections/ReachingWeb/ReachingWeb'
 import Routing from './Sections/Routing/Routing'
 import ReduxSection from './Sections/ReduxSection/ReduxSection'
 
-import './App.css';
+import classes from './App.module.css';
 
 const EXERCISES = [
   { component: <Exercise1 />,
@@ -72,14 +72,14 @@ class App extends Component {
   //*********************** RENDERS ************************** */
   renderHeaderNav() {
     return (
-      <header className="AppHeader">
+      <header className={classes.AppHeader}>
         <nav>
-          <ul className="AppNav">
+          <ul className={classes.AppNav}>
             {
               NAVBAR.map((item) => {
                 return (
-                  <li className="AppNavItem" key={item.path}>
-                    <NavLink className="AppNavLink" to={item.path}>
+                  <li className={classes.AppNavItem} key={item.path}>
+                    <NavLink className={classes.AppNavLink} activeClassName={classes.active} to={item.path}>
                       {item.title}
                     </NavLink>
                   </li>
@@ -119,7 +119,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className={classes.App}>
           { this.renderHeaderNav() }
           
           <Switch>
