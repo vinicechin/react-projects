@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import queryString from 'query-string'
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
 
@@ -10,6 +11,11 @@ class Checkout extends Component {
             cheese: 1,
             bacon: 1
         }
+    }
+
+    componentDidMount() {
+        const ingredients = queryString.parse(this.props.location.search, {parseNumbers: true})
+        this.setState({ ingredients })
     }
 
     checkoutCancelledHandler = () => {
