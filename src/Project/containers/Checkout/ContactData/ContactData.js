@@ -4,7 +4,7 @@ import classes from './ContactData.module.css'
 import axios from '../../../axios-orders'
 import Button, { btnTypes } from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import Input, { inputTypes } from '../../../components/UI/Input/Input'
+import Input, { createInput, createSelect } from '../../../components/UI/Input/Input'
 
 class ContactData extends Component {
     state = {
@@ -13,6 +13,13 @@ class ContactData extends Component {
         address: {
             street: '',
             country: ''
+        },
+        form: {
+            name: createInput('Name', 'Your Name', 'text'),
+            street: createInput('Street', 'Your Street', 'text'),
+            country: createInput('Country', 'Your Country', 'text'),
+            email: createInput('Email', 'Your Email', 'email'),
+            deliveryMethod: createSelect('Delivery Method', ['Fastest', 'Cheapest'])
         },
         loading: false
     }
@@ -25,15 +32,6 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price, // better calculated on the server (middleware attacks to app)
-            customer: {
-                name: 'Vinicius',
-                address: {
-                    street: 'Teste 1',
-                    country: 'Luxembourg'
-                },
-                email: 'teste@teste.com'
-            },
-            deliveryMethod: 'fastest'
         }
         axios.post('/orders.json', order)
             .then(response => {
@@ -47,27 +45,36 @@ class ContactData extends Component {
     }
 
     renderForm() {
+        const inputs = Object.keys(this.state.form)
+            .map(key => {
+                const input = this.state.form[key]
+                return (
+                    <Input
+                        key={key}
+                        type={input.type}
+                        value={input.value}
+                        config={input.config}
+                    />
+                )
+            })
+
         return (
-            <>
-                {this.state.loading ?
-                    <Spinner /> :
-                    <form>
-                        <Input type={inputTypes.input} label="Name" name="name" placeholder="Your Name" />
-                        <Input type={inputTypes.input} label="Email" name="email" placeholder="Your Email" />
-                        <Input type={inputTypes.input} label="Country" name="country" placeholder="Your Country" />
-                        <Input type={inputTypes.input} label="Street" name="street" placeholder="Your Street" />
-                        <Button type={btnTypes.success} clicked={this.orderHandler} >ORDER</Button>
-                    </form>
-                }
-            </>
+            <form>
+                {inputs}
+                <Button type={btnTypes.success} clicked={this.orderHandler} >ORDER</Button>
+            </form>
         )
+    }
+
+    renderContactData() {
+        return <>{ this.state.loading ? <Spinner /> : this.renderForm() }</>
     }
 
     render() {
         return (
             <div className={classes.ContactData}>
                 <h4>Enter your contact data</h4>
-                {this.renderForm()}
+                {this.renderContactData()}
             </div>
         )
     }
