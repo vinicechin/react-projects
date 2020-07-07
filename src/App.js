@@ -5,6 +5,7 @@ import Project from './Project/Project'
 import Exercise1 from './Exercises/Exercise1/Exercise1'
 import Exercise2 from './Exercises/Exercise2/Exercise2'
 import Exercise3 from './Exercises/Exercise3/Exercise3'
+import Exercise4 from './Exercises/Exercise4/Exercise4'
 import BasicFeatures from './Sections/BasicFeatures/BasicFeatures'
 import StylingReact from './Sections/StylingReact/StylingReact'
 import ErrorBoundaries from './Sections/ErrorBoundaries/ErrorBoundaries'
@@ -24,7 +25,10 @@ const EXERCISES = [
     title: "Exercise 2" },
   { component: <Exercise3 />,
     value: 3,
-    title: "Exercise 3" }
+    title: "Exercise 3" },
+  { component: <Exercise4 />,
+    value: 4,
+    title: "Exercise 4" }
 ]
 
 const SECTIONS = [
