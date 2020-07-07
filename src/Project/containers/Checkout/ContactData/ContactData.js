@@ -9,13 +9,52 @@ import Input, { createInput, createSelect } from '../../../components/UI/Input/I
 class ContactData extends Component {
     state = {
         form: {
-            name: createInput('Name', 'Your Name', 'text'),
-            street: createInput('Street', 'Your Street', 'text'),
-            country: createInput('Country', 'Your Country', 'text'),
-            email: createInput('Email', 'Your Email', 'email'),
-            deliveryMethod: createSelect('Delivery Method', ['Fastest', 'Cheapest'])
+            name: createInput({ label: 'Name', placeholder: 'Your Name', validation: {required: true, minLen: 2} }),
+            street: createInput({ label: 'Street', placeholder: 'Your Street', validation: {required: true} }),
+            country: createInput({ label: 'Country', placeholder: 'Your Country' }),
+            email: createInput({ label: 'Email', placeholder: 'Your Email', type: 'email', validation: {required: true, email: true} }),
+            deliveryMethod: createSelect({ label: 'Delivery Method', options: ['Fastest', 'Cheapest'], selected: 0 })
         },
-        loading: false
+        loading: false,
+        valid: false
+    }
+
+    checkValidity = (value, rules) => {
+        let isValid = true
+        if (rules.required) {
+            isValid &= value.trim() !== ''
+        }
+        if (rules.minLen) {
+            isValid &= value.length >= rules.minLen
+        }
+        if (rules.email) {
+            isValid &= value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null
+        }
+        return isValid
+    }
+
+    inputChangedHandler = (key, event) => {
+        const value = event.target.value
+        const input = { ...this.state.form[key] }
+
+        if (input.validation) {
+            input.valid = this.checkValidity(value, input.validation)
+            input.touched = true
+        }
+
+        this.setState({
+            form: {
+                ...this.state.form,
+                [key]: {
+                    ...input,
+                    value
+                }
+            },
+            valid: Object.keys(this.state.form)
+                .reduce((isValid, key) => {
+                    return isValid && (this.state.form[key].validation ? this.state.form[key].valid : true)
+                }, true)
+        })
     }
 
     orderHandler = (event) => {
@@ -33,8 +72,9 @@ class ContactData extends Component {
             price: this.props.price, // better calculated on the server (middleware attacks to app)
             contactInfo
         }
+
         axios.post('/orders.json', order)
-            .then(response => {
+            .then(() => {
                 this.setState({ loading: false })
                 this.props.history.go(-2)
             })
@@ -44,29 +84,20 @@ class ContactData extends Component {
             })
     }
 
-    inputChangedHandler = (key, event) => {
-        this.setState({
-            form: {
-                ...this.state.form,
-                [key]: {
-                    ...this.state.form[key],
-                    value: event.target.value
-                }
-            }
-        })
-    }
-
     renderForm() {
         const inputs = Object.keys(this.state.form)
             .map(key => {
                 const input = this.state.form[key]
                 return (
                     <Input
+                        changed={this.inputChangedHandler.bind(this, key)}
                         key={key}
                         type={input.type}
                         value={input.value}
+                        label={input.label}
                         config={input.config}
-                        changed={this.inputChangedHandler.bind(this, key)}
+                        options={input.options}
+                        invalid={'valid' in input ? !input.valid && input.touched : false}
                     />
                 )
             })
@@ -74,7 +105,7 @@ class ContactData extends Component {
         return (
             <form onSubmit={this.orderHandler}>
                 {inputs}
-                <Button type={btnTypes.success} clicked={this.orderHandler} >ORDER</Button>
+                <Button type={btnTypes.success} disabled={!this.state.valid} clicked={this.orderHandler} >ORDER</Button>
             </form>
         )
     }

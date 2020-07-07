@@ -1,40 +1,57 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import classes from './Input.module.css'
 
 const Input = (props) => {
+    const inputClasses = classNames({
+        [classes.InputElement]: true,
+        [classes.Invalid]: props.invalid,
+    })
+
+    const validationError = () => {
+        const errorClasses = classNames({
+            [classes.ValidationError]: true,
+            [classes.Invisible]: !props.invalid,
+        })
+
+        return (
+            <p className={errorClasses}>Please, enter a valid {props.label.toLowerCase()}</p>
+        )
+    }
+
     const inputs = {
         input: 
             <input 
-                className={classes.InputElement}
+                className={inputClasses}
                 {...props.config}
                 value={props.value}
                 onChange={props.changed}
             />,
         textarea: 
             <textarea 
-                className={classes.InputElement}
+                className={inputClasses}
                 {...props.config}
                 value={props.value}
                 onChange={props.changed}
             />,
         select:
-            <select className={classes.InputElement} {...props.config.select} onChange={props.changed}>
-                {props.config.options &&
-                    props.config.options.map(option => {
-                        const value = option.toLowerCase()
+            <select className={inputClasses} {...props.config} value={props.value} onChange={props.changed}>
+                {props.options &&
+                    props.options.map(option => {
                         return (
-                            <option value={value} key={value}>{option}</option>
+                            <option value={option.value} key={option.value} >{option.label}</option>
                         )
                     })
                 }
             </select>
     }
-    
+
     return (
         <div className={classes.Input}>
-            <label className={classes.Label}>{props.config.label}</label>
+            <label className={classes.Label}>{props.label}</label>
             {inputs[props.type]}
+            {validationError()}
         </div>
     )
 }
@@ -47,29 +64,46 @@ export const inputTypes = {
     select: 'select'
 }
 
-export const createInput = (label='Default', placeholder='', type='text', value='') => {
+export const createInput = (params) => {
+    const type = params.type || 'text'
+    const label = params.label || 'Default'
+    const validation = params.validation
+    const placeholder = params.placeholder || ''
+    const value = params.value || ''
+    
     return {
         type: inputTypes.input,
         config: {
             type,
-            label,
             name: label.toLowerCase().replace(' ', '-'),
             placeholder
         },
-        value           
+        label,
+        value,
+        validation,
+        valid: false,
+        touched: false
     }
 }
 
-export const createSelect = (label='Default', options=[], value='') => {
+export const createSelect = (params) => {
+    const label = params.label || 'Default'
+    const selected = params.selected || 0
+    const options = params.options ? 
+        params.options.map((option) => {
+            return {
+                value: option.toLowerCase(),
+                label: option,
+            }
+        }) : []
+
     return {
         type: inputTypes.select,
+        options,
         config: {
-            options,
-            label,
-            select: {
-                name: label.toLowerCase().replace(' ', '-')
-            }
+            name: label.toLowerCase().replace(' ', '-')
         },
-        value: ''
+        label,
+        value: options[selected] ? options[selected].value : ''
     }
 }
