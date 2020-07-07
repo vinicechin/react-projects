@@ -8,12 +8,6 @@ import Input, { createInput, createSelect } from '../../../components/UI/Input/I
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            country: ''
-        },
         form: {
             name: createInput('Name', 'Your Name', 'text'),
             street: createInput('Street', 'Your Street', 'text'),
@@ -26,12 +20,18 @@ class ContactData extends Component {
 
     orderHandler = (event) => {
         event.preventDefault()
-        
         this.setState({ loading: true })
+        
+        const contactInfo = Object.keys(this.state.form)
+            .reduce((form, key) => {
+                form[key] = this.state.form[key].value
+                return form
+            }, {})
         
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price, // better calculated on the server (middleware attacks to app)
+            contactInfo
         }
         axios.post('/orders.json', order)
             .then(response => {
@@ -72,7 +72,7 @@ class ContactData extends Component {
             })
 
         return (
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {inputs}
                 <Button type={btnTypes.success} clicked={this.orderHandler} >ORDER</Button>
             </form>
