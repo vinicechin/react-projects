@@ -9,20 +9,22 @@ const Input = (props) => {
                 className={classes.InputElement}
                 {...props.config}
                 value={props.value}
+                onChange={props.changed}
             />,
         textarea: 
             <textarea 
                 className={classes.InputElement}
                 {...props.config}
                 value={props.value}
+                onChange={props.changed}
             />,
         select:
-            <select className={classes.InputElement} {...props.config.select} >
+            <select className={classes.InputElement} {...props.config.select} onChange={props.changed}>
                 {props.config.options &&
                     props.config.options.map(option => {
                         const value = option.toLowerCase()
                         return (
-                            <option value key={value}>{option}</option>
+                            <option value={value} key={value}>{option}</option>
                         )
                     })
                 }

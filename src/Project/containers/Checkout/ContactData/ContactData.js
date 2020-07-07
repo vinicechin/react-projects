@@ -44,6 +44,18 @@ class ContactData extends Component {
             })
     }
 
+    inputChangedHandler = (key, event) => {
+        this.setState({
+            form: {
+                ...this.state.form,
+                [key]: {
+                    ...this.state.form[key],
+                    value: event.target.value
+                }
+            }
+        })
+    }
+
     renderForm() {
         const inputs = Object.keys(this.state.form)
             .map(key => {
@@ -54,6 +66,7 @@ class ContactData extends Component {
                         type={input.type}
                         value={input.value}
                         config={input.config}
+                        changed={this.inputChangedHandler.bind(this, key)}
                     />
                 )
             })
