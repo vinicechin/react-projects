@@ -5,7 +5,7 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import Modal from '../../components/UI/Modal/Modal'
 import Spinner from '../../components/UI/Spinner/Spinner'
-import axios from '../../axios-orders'
+// import axios from '../../axios-orders'
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -24,16 +24,16 @@ class BurgerBuilder extends Component {
         error: false
     }
 
-    componentDidMount() {
-        axios.get('/ingredients.json')
-            .then(({ data }) => {
-                this.setState({ingredients: data})
-            })
-            .catch((error) => {
-                console.log(error)
-                this.setState({ error: true })
-            })
-    }
+    // componentDidMount() {
+    //     axios.get('/ingredients.json')
+    //         .then(({ data }) => {
+    //             this.setState({ingredients: data})
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //             this.setState({ error: true })
+    //         })
+    // }
 
     updatePurchasable(ingredients) {
         const total = Object.keys(ingredients)
