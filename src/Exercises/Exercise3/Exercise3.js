@@ -50,6 +50,7 @@ class Exercise3 extends Component {
           <Route path={`${this.props.match.url}/users`} component={ROUTES['users'].component} />
           <Route path={`${this.props.match.url}/courses`} component={ROUTES['courses'].component} />
           <Redirect from={`${this.props.match.url}/all-courses`} to={`${this.props.match.url}/courses`} />
+          <Redirect from={`${this.props.match.url}`} exact to={`${this.props.match.url}/courses`} />
           <Route render={() => <p>404 - Page not Found</p>} />
         </Switch>
       </div>
