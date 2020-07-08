@@ -48,12 +48,7 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        const queryIngredients = Object.keys(this.props.ingredients)
-            .map((key) => {
-                return `${key}=${this.props.ingredients[key]}`
-            })
-            .join('&')
-        this.props.history.push(`${this.props.match.url}/checkout?${queryIngredients}&price=${this.props.total.toFixed(2)}`)
+        this.props.history.push(`${this.props.match.url}/checkout`)
     }
 
     renderModal() {
