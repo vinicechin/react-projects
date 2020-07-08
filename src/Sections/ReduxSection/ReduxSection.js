@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 
 import Counter from '../shared/components/Counter/Counter'
 import reducer from '../shared/store/reducer'
@@ -19,7 +20,7 @@ const logger = store => {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware(logger)))
+const store = createStore(reducer, composeEnhancers(applyMiddleware(logger, thunk)))
 
 const ReduxSection = () => {
     return (

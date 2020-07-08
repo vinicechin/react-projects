@@ -31,10 +31,15 @@ export const sub = (value) => {
     }
 }
 
-export const storeResult = (value) => {
-    return {
-        type: STORE_RESULT,
-        value
+const storeResult = (value) => {
+    return { type: STORE_RESULT, value }
+}
+
+export const saveResult = (value) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(storeResult(value))
+        }, 2000)
     }
 }
 
