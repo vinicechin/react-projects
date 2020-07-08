@@ -1,23 +1,30 @@
 import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
 import Layout from './components/Layout/Layout'
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
 import Checkout from './containers/Checkout/Checkout'
 import Orders from './containers/Orders/Orders'
+import reducer from './store/reducer'
+
+const store = createStore(reducer)
 
 class Project extends Component {
     render() {
         return (
-            <div style={{ textAlign: 'left' }}>
-                <Layout>
-                    <Switch>
-                        <Route path={`${this.props.match.url}/checkout`} component={Checkout} />
-                        <Route path={`${this.props.match.url}/orders`} component={Orders} />
-                        <Route path={this.props.match.url} exact component={BurgerBuilder} />
-                    </Switch>
-                </Layout>
-            </div>
+            <Provider store={store}>
+                <div style={{ textAlign: 'left' }}>
+                    <Layout>
+                        <Switch>
+                            <Route path={`${this.props.match.url}/checkout`} component={Checkout} />
+                            <Route path={`${this.props.match.url}/orders`} component={Orders} />
+                            <Route path={this.props.match.url} exact component={BurgerBuilder} />
+                        </Switch>
+                    </Layout>
+                </div>
+            </Provider>
         )
     }
 }
