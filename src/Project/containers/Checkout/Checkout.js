@@ -6,8 +6,12 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from './ContactData/ContactData'
 
 class Checkout extends Component {
-    checkoutCancelledHandler = () => {
+    goBack = () => {
         this.props.history.goBack()
+    }
+
+    checkoutCancelledHandler = () => {
+        this.goBack()
     }
 
     checkoutContinuedHandler = () => {
@@ -15,21 +19,25 @@ class Checkout extends Component {
     }
 
     render() {
+        console.log(this.props.ingredients)
         return (
             <div>
-                {this.props.ingredients && (
-                    <>
-                        <CheckoutSummary
-                            ingredients={this.props.ingredients}
-                            cancelled={this.checkoutCancelledHandler}
-                            continued={this.checkoutContinuedHandler}
-                        />
-                        <Route
-                            path={`${this.props.match.url}/contact-data`}
-                            component={ContactData}
-                        />
-                    </>
-                )}
+                { this.props.ingredients ?
+                    (
+                        <>
+                            <CheckoutSummary
+                                ingredients={this.props.ingredients}
+                                cancelled={this.checkoutCancelledHandler}
+                                continued={this.checkoutContinuedHandler}
+                            />
+                            <Route
+                                path={`${this.props.match.url}/contact-data`}
+                                component={ContactData}
+                            />
+                        </>
+                    ) :
+                    this.goBack()
+                }
             </div>
         )
     }
@@ -37,7 +45,7 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients
+        ingredients: state.builder.ingredients
     }
 }
  

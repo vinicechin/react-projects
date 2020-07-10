@@ -37,6 +37,10 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredients: action.ingredients,
+                total: Object.keys(action.ingredients)
+                    .reduce((total, key) => {
+                        return total + INGREDIENT_PRICES[key] * action.ingredients[key]
+                    }, 0),
                 error: false
             }
         case actionTypes.FETCH_INGREDIENTS_FAILED:
