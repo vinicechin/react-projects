@@ -9,7 +9,9 @@ import Checkout from './containers/Checkout/Checkout'
 import Orders from './containers/Orders/Orders'
 import reducer from './store/reducer'
 
-const store = createStore(reducer)
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__({
+    name: 'Burger Builder'
+}))
 
 class Project extends Component {
     render() {
