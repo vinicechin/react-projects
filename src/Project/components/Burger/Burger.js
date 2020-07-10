@@ -6,9 +6,10 @@ import classes from './Burger.module.css';
 const Burger = (props) => {
     const ingredients = Object.keys(props.ingredients)
         .map((ingredient) => {
-            return [...Array(props.ingredients[ingredient])].map((_, index) => {
-                return <BurgerIngredient key={ingredient + index} type={ingredient} />
-            })
+            return [...Array(props.ingredients[ingredient])]
+                .map((_, index) => {
+                    return <BurgerIngredient key={ingredient + index} type={ingredient} />
+                })
         })
         .reduce((arr, el) => {
             return arr.concat(el)
