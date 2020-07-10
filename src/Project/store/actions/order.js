@@ -1,11 +1,11 @@
 import axios from '../../axios-orders'
 import * as actionTypes from './types'
+import * as utils from '../utility'
 
 export const purchaseSuccess = (id, order) => {
     return {
         type: actionTypes.PURCHASE_SUCCESS,
-        id,
-        order
+        order: utils.updateObject(order, { id })
     }
 }
 

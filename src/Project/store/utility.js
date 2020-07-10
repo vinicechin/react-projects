@@ -33,3 +33,13 @@ export const deleteFromArray = (params) => {
 
     return [...array]
 }
+
+export const sumValuesWithRef = (object, reference) => {
+    if (!(object && reference)) {
+        return 0
+    }
+    return Object.keys(object)
+        .reduce((total, key) => {
+            return total + reference[key] * object[key]
+        }, 0)
+}
