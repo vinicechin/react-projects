@@ -6,8 +6,8 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from './ContactData/ContactData'
 
 class Checkout extends Component {
-    goBack = () => {
-        this.props.history.goBack()
+    goBack = (nPages = -1) => {
+        this.props.history.go(nPages)
     }
 
     checkoutCancelledHandler = () => {
@@ -23,7 +23,7 @@ class Checkout extends Component {
         return (
             <div>
                 { this.props.ingredients ?
-                    this.props.purchased ? this.goBack() :
+                    this.props.purchased ? this.goBack(-2) :
                     (
                         <>
                             <CheckoutSummary
