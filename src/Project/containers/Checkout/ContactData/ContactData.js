@@ -72,7 +72,7 @@ class ContactData extends Component {
             contactInfo
         }
 
-        this.props.onrderBurger(order)
+        this.props.orderBurger(order)
     }
 
     renderForm() {

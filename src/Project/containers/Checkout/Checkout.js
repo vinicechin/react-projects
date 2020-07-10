@@ -23,6 +23,7 @@ class Checkout extends Component {
         return (
             <div>
                 { this.props.ingredients ?
+                    this.props.purchased ? this.goBack() :
                     (
                         <>
                             <CheckoutSummary
@@ -45,7 +46,8 @@ class Checkout extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.builder.ingredients
+        ingredients: state.builder.ingredients,
+        purchased: state.order.purchased
     }
 }
  
