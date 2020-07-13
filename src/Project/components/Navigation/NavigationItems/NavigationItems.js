@@ -9,6 +9,7 @@ const NavigationItems = (props) => {
         <ul className={classes.NavigationItems} >
             <NavigationItem link={props.match.url} exact >Burger Builder</NavigationItem>
             <NavigationItem link={`${props.match.url}/orders`} >Orders</NavigationItem>
+            <NavigationItem link={`${props.match.url}/auth`} >Login</NavigationItem>
         </ul>
     )
 }

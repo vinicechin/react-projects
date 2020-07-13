@@ -8,6 +8,7 @@ import Layout from './components/Layout/Layout'
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
 import Checkout from './containers/Checkout/Checkout'
 import Orders from './containers/Orders/Orders'
+import Auth from './containers/Auth/Auth'
 import reducer from './store/reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -23,6 +24,7 @@ class Project extends Component {
                         <Switch>
                             <Route path={`${this.props.match.url}/checkout`} component={Checkout} />
                             <Route path={`${this.props.match.url}/orders`} component={Orders} />
+                            <Route path={`${this.props.match.url}/auth`} component={Auth} />
                             <Route path={this.props.match.url} exact component={BurgerBuilder} />
                         </Switch>
                     </Layout>

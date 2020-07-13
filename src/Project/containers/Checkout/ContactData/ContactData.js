@@ -4,33 +4,19 @@ import { connect } from 'react-redux'
 import classes from './ContactData.module.css'
 import Button, { btnTypes } from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import Input, { createInput, createSelect } from '../../../components/UI/Input/Input'
+import Input, { createInputWithLabel, createSelectWithLabel, checkValidity } from '../../../components/UI/Input/Input'
 import * as actionCreators from '../../../store/actions'
 
 class ContactData extends Component {
     state = {
         form: {
-            name: createInput({ label: 'Name', placeholder: 'Your Name', validation: {required: true, minLen: 2} }),
-            street: createInput({ label: 'Street', placeholder: 'Your Street', validation: {required: true} }),
-            country: createInput({ label: 'Country', placeholder: 'Your Country' }),
-            email: createInput({ label: 'Email', placeholder: 'Your Email', type: 'email', validation: {required: true, email: true} }),
-            deliveryMethod: createSelect({ label: 'Delivery Method', options: ['Fastest', 'Cheapest'], selected: 0 })
+            name: createInputWithLabel({ placeholder: 'Your Name', validation: {required: true, minLen: 2} }),
+            street: createInputWithLabel({ label: 'Street', placeholder: 'Your Street', validation: {required: true} }),
+            country: createInputWithLabel({ label: 'Country', placeholder: 'Your Country' }),
+            email: createInputWithLabel({ label: 'Email', placeholder: 'Your Email', type: 'email', validation: {required: true, email: true} }),
+            deliveryMethod: createSelectWithLabel({ label: 'Delivery Method', options: ['Fastest', 'Cheapest'], selected: 0 })
         },
         valid: false
-    }
-
-    checkValidity = (value, rules) => {
-        let isValid = true
-        if (rules.required) {
-            isValid &= value.trim() !== ''
-        }
-        if (rules.minLen) {
-            isValid &= value.length >= rules.minLen
-        }
-        if (rules.email) {
-            isValid &= value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null
-        }
-        return isValid
     }
 
     inputChangedHandler = (key, event) => {
@@ -38,7 +24,7 @@ class ContactData extends Component {
         const input = { ...this.state.form[key] }
 
         if (input.validation) {
-            input.valid = this.checkValidity(value, input.validation)
+            input.valid = checkValidity(value, input.validation)
             input.touched = true
         }
 

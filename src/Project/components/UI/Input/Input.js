@@ -16,7 +16,7 @@ const Input = (props) => {
         })
 
         return (
-            <p className={errorClasses}>Please, enter a valid {props.label.toLowerCase()}</p>
+            <p className={errorClasses}>Please, enter a valid {props.config.name}</p>
         )
     }
 
@@ -49,7 +49,7 @@ const Input = (props) => {
 
     return (
         <div className={classes.Input}>
-            <label className={classes.Label}>{props.label}</label>
+            {props.label && <label className={classes.Label}>{props.label}</label>}
             {inputs[props.type]}
             {validationError()}
         </div>
@@ -64,9 +64,36 @@ export const inputTypes = {
     select: 'select'
 }
 
+export const checkValidity = (value, rules) => {
+    let isValid = true
+    if (rules.required) {
+        isValid &= value.trim() !== ''
+    }
+    if (rules.minLen) {
+        isValid &= value.length >= rules.minLen
+    }
+    if (rules.email) {
+        isValid &= value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null
+    }
+    return isValid
+}
+
+export const createInputWithLabel = (params) => {
+    const label = params.label || 'Default'
+    const input = createInput({
+        type: params.type,
+        name: label.toLowerCase().replace(' ', '-'),
+        value: params.value,
+        validation: params.validation,
+        placeholder: params.placeholder
+    })
+    
+    return { ...input, label }
+}
+
 export const createInput = (params) => {
     const type = params.type || 'text'
-    const label = params.label || 'Default'
+    const name = params.name || ''
     const validation = params.validation
     const placeholder = params.placeholder || ''
     const value = params.value || ''
@@ -75,10 +102,9 @@ export const createInput = (params) => {
         type: inputTypes.input,
         config: {
             type,
-            name: label.toLowerCase().replace(' ', '-'),
+            name,
             placeholder
         },
-        label,
         value,
         validation,
         valid: false,
@@ -86,8 +112,20 @@ export const createInput = (params) => {
     }
 }
 
-export const createSelect = (params) => {
+export const createSelectWithLabel = (params) => {
     const label = params.label || 'Default'
+    const select = createSelect({
+        type: params.type,
+        name: label.toLowerCase().replace(' ', '-'),
+        selected: params.selected,
+        options: params.options
+    })
+    
+    return { ...select, label }
+}
+
+export const createSelect = (params) => {
+    const name = params.name || ''
     const selected = params.selected || 0
     const options = params.options ? 
         params.options.map((option) => {
@@ -101,9 +139,8 @@ export const createSelect = (params) => {
         type: inputTypes.select,
         options,
         config: {
-            name: label.toLowerCase().replace(' ', '-')
+            name
         },
-        label,
         value: options[selected] ? options[selected].value : ''
     }
 }
