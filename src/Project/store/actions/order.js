@@ -2,14 +2,14 @@ import axios from '../../axios-orders'
 import * as actionTypes from './types'
 import * as utils from '../utility'
 
-export const purchaseSuccess = (id, order) => {
+const purchaseSuccess = (id, order) => {
     return {
         type: actionTypes.PURCHASE_SUCCESS,
         order: utils.updateObject(order, { id })
     }
 }
 
-export const purchaseFail = (error) => {
+const purchaseFail = (error) => {
     return {
         type: actionTypes.PURCHASE_FAIL,
         error
@@ -43,14 +43,14 @@ export const purchaseStart = () => {
     }
 }
 
-export const fetchOrdersSuccess = (orders) => {
+const fetchOrdersSuccess = (orders) => {
     return {
         type: actionTypes.FETCH_ORDERS_SUCCESS,
         orders
     }
 }
 
-export const fetchOrdersFail = (error) => {
+const fetchOrdersFail = (error) => {
     return {
         type: actionTypes.FETCH_ORDERS_FAIL,
         error

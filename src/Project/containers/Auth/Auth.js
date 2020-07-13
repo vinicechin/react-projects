@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
+import classes from './Auth.module.css'
 import Input, { createInput, checkValidity } from '../../components/UI/Input/Input'
 import Button, { btnTypes } from '../../components/UI/Button/Button'
-import classes from './Auth.module.css'
+import * as actionCreators from '../../store/actions'
 
 class Auth extends Component {
     state = {
@@ -52,7 +54,8 @@ class Auth extends Component {
     }
 
     authHandler = (event) => {
-
+        event.preventDefault()
+        this.props.login(this.state.form.email.value, this.state.form.password.value)
     }
 
     renderForm() {
@@ -89,5 +92,11 @@ class Auth extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (email, password) => dispatch(actionCreators.auth(email, password))
+    }
+}
  
-export default Auth
+export default connect(null, mapDispatchToProps)(Auth)
