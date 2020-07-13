@@ -55,7 +55,7 @@ class Auth extends Component {
 
     authHandler = (event) => {
         event.preventDefault()
-        this.props.login(this.state.form.email.value, this.state.form.password.value)
+        this.props.signup(this.state.form.email.value, this.state.form.password.value)
     }
 
     renderForm() {
@@ -95,7 +95,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: (email, password) => dispatch(actionCreators.auth(email, password))
+        signup: (email, password) => dispatch(actionCreators.auth(email, password))
     }
 }
  
