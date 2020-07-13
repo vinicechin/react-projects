@@ -15,4 +15,4 @@ const Button = (props) => {
 
 export default Button
 
-export const btnTypes = { success: 'Success', danger: 'Danger' }
+export const btnTypes = { success: 'Success', danger: 'Danger', secondary: 'Secondary' }

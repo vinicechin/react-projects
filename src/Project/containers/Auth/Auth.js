@@ -22,7 +22,8 @@ class Auth extends Component {
                 validation: { required: true, minLen: 6 }
             })
         },
-        valid: false
+        valid: false,
+        isSignup: true
     }
 
     checkFormValidity = (form) => {
@@ -41,21 +42,32 @@ class Auth extends Component {
             input.touched = true
         }
 
+        const form = {
+            ...this.state.form,
+            [key]: {
+                ...input,
+                value
+            }
+        }
+
         this.setState({
-            form: {
-                ...this.state.form,
-                [key]: {
-                    ...input,
-                    value
-                }
-            },
-            valid: this.checkFormValidity(this.state.form)
+            form,
+            valid: this.checkFormValidity(form)
         })
     }
 
     authHandler = (event) => {
         event.preventDefault()
-        this.props.signup(this.state.form.email.value, this.state.form.password.value)
+        this.props.auth(this.state.form.email.value, this.state.form.password.value, this.state.isSignup)
+    }
+
+    toggleAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                isSignup: !prevState.isSignup
+            }
+        })
     }
 
     renderForm() {
@@ -88,6 +100,9 @@ class Auth extends Component {
         return (
             <div className={classes.Auth}>
                 {this.renderForm()}
+                <Button type={btnTypes.secondary} clicked={this.toggleAuthModeHandler} >
+                    SWITCH TO { this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
+                </Button>
             </div>
         )
     }
@@ -95,7 +110,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        signup: (email, password) => dispatch(actionCreators.auth(email, password))
+        auth: (email, password, isSignup) => dispatch(actionCreators.auth(email, password, isSignup))
     }
 }
  

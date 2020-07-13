@@ -21,21 +21,31 @@ const authFail = (error) => {
     }
 }
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignUp) => {
     const data = {
         email,
         password,
         returnSecureToken: true
     }
+    const url = isSignUp ?
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}` :
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
 
     return dispatch => {
-        axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${process.env.API_KEY}`, data)
+        axios.post(url, data)
             .then( response => {
+                console.log(response)
                 dispatch(authSuccess(response.data))
             })
-            .catch( error => {
+            .catch( (error) => {
+                const err = error.response ?
+                    error.response.data :
+                    error.request ?
+                        error.request :
+                        error.message
                 alert(error)
-                dispatch(authFail(error))
+                console.log(err)
+                dispatch(authFail(err))
             })
 
         dispatch(authSent())

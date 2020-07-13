@@ -28,17 +28,19 @@ class ContactData extends Component {
             input.touched = true
         }
 
+        const form = {
+            ...this.state.form,
+            [key]: {
+                ...input,
+                value
+            }
+        }
+
         this.setState({
-            form: {
-                ...this.state.form,
-                [key]: {
-                    ...input,
-                    value
-                }
-            },
-            valid: Object.keys(this.state.form)
+            form,
+            valid: Object.keys(form)
                 .reduce((isValid, key) => {
-                    return isValid && (this.state.form[key].validation ? this.state.form[key].valid : true)
+                    return isValid && (form[key].validation ? form[key].valid : true)
                 }, true)
         })
     }

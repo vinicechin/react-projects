@@ -67,13 +67,13 @@ export const inputTypes = {
 export const checkValidity = (value, rules) => {
     let isValid = true
     if (rules.required) {
-        isValid &= value.trim() !== ''
+        isValid &= (value.trim() !== '')
     }
     if (rules.minLen) {
-        isValid &= value.length >= rules.minLen
+        isValid &= (value.length >= rules.minLen)
     }
     if (rules.email) {
-        isValid &= value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null
+        isValid &= (value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null)
     }
     return isValid
 }
