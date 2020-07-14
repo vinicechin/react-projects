@@ -7,10 +7,11 @@ const authSent = () => {
     }
 }
 
-const authSuccess = (data) => {
+const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        data
+        token,
+        userId
     }
 }
 
@@ -35,7 +36,8 @@ export const auth = (email, password, isSignUp) => {
         axios.post(url, data)
             .then( response => {
                 console.log(response)
-                dispatch(authSuccess(response.data))
+                const { localId, idToken } = response.data
+                dispatch(authSuccess(idToken, localId))
             })
             .catch( (error) => {
                 const err = error.response ?
