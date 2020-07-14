@@ -35,17 +35,15 @@ export const auth = (email, password, isSignUp) => {
     return dispatch => {
         axios.post(url, data)
             .then( response => {
-                console.log(response)
                 const { localId, idToken } = response.data
                 dispatch(authSuccess(idToken, localId))
             })
             .catch( (error) => {
                 const err = error.response ?
-                    error.response.data :
+                    error.response.data.error :
                     error.request ?
                         error.request :
                         error.message
-                alert(error)
                 console.log(err)
                 dispatch(authFail(err))
             })
