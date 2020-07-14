@@ -34,7 +34,12 @@ export const initIngredients = () => {
                 dispatch(storeIngredients(data))
             })
             .catch((error) => {
-                console.log(error)
+                const err = error.response ?
+                    error.response.data.error :
+                    error.request ?
+                        error.request :
+                        error.message
+                console.log(err)
                 dispatch(fetchIngredientsFailed())
             })
     }

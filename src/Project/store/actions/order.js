@@ -78,7 +78,13 @@ export const fetchOrders = () => {
             })
             .catch( error => {
                 alert(error)
-                dispatch(fetchOrdersFail(error))
+                const err = error.response ?
+                    error.response.data.error :
+                    error.request ?
+                        error.request :
+                        error.message
+                console.log(err)
+                dispatch(fetchOrdersFail(err))
             })
         
         dispatch(fetchOrdersSent())
