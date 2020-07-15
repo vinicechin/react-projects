@@ -6,7 +6,8 @@ const INGREDIENT_PRICES = { salad: 0.5, cheese: 0.4, meat: 1.3, bacon: 0.7 }
 const initialState = {
     ingredients: null,
     total: 0,
-    error: false
+    error: false,
+    building: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,7 +25,8 @@ const addIngredient = (state, action) => {
         ingredients: utils.updateObject(state.ingredients, { 
             [action.ingredient]: state.ingredients[action.ingredient] + 1 
         }),
-        total: state.total + INGREDIENT_PRICES[action.ingredient]
+        total: state.total + INGREDIENT_PRICES[action.ingredient],
+        building: true
     })
 }
 
@@ -33,7 +35,8 @@ const removeIngredient = (state, action) => {
         ingredients: utils.updateObject(state.ingredients, { 
             [action.ingredient]: state.ingredients[action.ingredient] - 1 
         }),
-        total: state.total - INGREDIENT_PRICES[action.ingredient]
+        total: state.total - INGREDIENT_PRICES[action.ingredient],
+        building: true
     })
 }
 
@@ -41,7 +44,8 @@ const storeIngredients = (state, action) => {
     return utils.updateObject(state, {
         ingredients: action.ingredients,
         total: utils.sumValuesWithRef(action.ingredients, INGREDIENT_PRICES),
-        error: false
+        error: false,
+        building: false
     })
 }
 

@@ -19,7 +19,6 @@ class Checkout extends Component {
     }
 
     render() {
-        console.log(this.props.ingredients)
         return (
             <div>
                 { this.props.ingredients ?

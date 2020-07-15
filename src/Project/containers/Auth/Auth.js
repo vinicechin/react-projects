@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import classes from './Auth.module.css'
 import Input, { createInput, checkValidity } from '../../components/UI/Input/Input'
@@ -25,6 +26,12 @@ class Auth extends Component {
         },
         valid: false,
         isSignup: true
+    }
+
+    componentDidMount() {
+        if (!this.props.building && this.props.authRedirectPath !== this.props.parentPath) {
+            this.props.setRedirectPath(this.props.parentPath)
+        }
     }
 
     checkFormValidity = (form) => {
@@ -99,30 +106,39 @@ class Auth extends Component {
 
     render() {
         return (
-            <div className={classes.Auth}>
-                <p className={classes.Error} >{this.props.error && this.props.error.message}</p>
-                { this.props.loading ?
-                    <Spinner /> :
-                    this.renderForm()
+            <>
+                { this.props.isAuth ?
+                    <Redirect to={this.props.authRedirectPath} /> :
+                    <div className={classes.Auth}>
+                        <p className={classes.Error} >{this.props.error && this.props.error.message}</p>
+                        { this.props.loading ?
+                            <Spinner /> :
+                            this.renderForm()
+                        }
+                        <Button type={btnTypes.secondary} clicked={this.toggleAuthModeHandler} >
+                            SWITCH TO { this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
+                        </Button>
+                    </div>
                 }
-                <Button type={btnTypes.secondary} clicked={this.toggleAuthModeHandler} >
-                    SWITCH TO { this.state.isSignup ? 'SIGN IN' : 'SIGN UP'}
-                </Button>
-            </div>
+            </>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
+        building: state.builder.building,
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuth: state.auth.token !== null,
+        authRedirectPath: state.auth.redirectPath
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        auth: (email, password, isSignup) => dispatch(actionCreators.auth(email, password, isSignup))
+        auth: (email, password, isSignup) => dispatch(actionCreators.auth(email, password, isSignup)),
+        setRedirectPath: (path) => dispatch(actionCreators.setRedirectPath(path))
     }
 }
  

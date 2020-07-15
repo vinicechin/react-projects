@@ -19,7 +19,7 @@ const SideDrawer = (props) => {
             <div className={backDropClasses} >
                 <Logo height="11%" />
                 <nav style={{ marginTop: '32px' }} >
-                    <NavigationItems />
+                    <NavigationItems isAuth={props.isAuth} />
                 </nav>
             </div>
         </>
