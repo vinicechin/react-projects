@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
-import Layout from './components/Layout/Layout'
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
-import Checkout from './containers/Checkout/Checkout'
-import Orders from './containers/Orders/Orders'
-import Auth from './containers/Auth/Auth'
-import Logout from './containers/Auth/Logout/Logout'
 import reducer from './store/reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,24 +14,10 @@ class Project extends Component {
     render() {
         return (
             <Provider store={store}>
-                <div style={{ textAlign: 'left' }}>
-                    <Layout>
-                        <Switch>
-                            <Route path={`${this.props.match.url}/checkout`} component={Checkout} />
-                            <Route path={`${this.props.match.url}/orders`} component={Orders} />
-                            <Route path={`${this.props.match.url}/auth`} children={
-                                <Auth parentPath={this.props.match.url} />
-                            }/>
-                            <Route path={`${this.props.match.url}/logout`} children={
-                                <Logout parentPath={this.props.match.url} />
-                            }/>
-                            <Route path={this.props.match.url} exact component={BurgerBuilder} />
-                        </Switch>
-                    </Layout>
-                </div>
+                <BurgerBuilder />
             </Provider>
         )
     }
 }
 
-export default withRouter(Project)
+export default Project
