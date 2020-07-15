@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Layout from '../../components/Layout/Layout'
@@ -20,19 +20,28 @@ class BurgerBuilder extends Component {
             <div style={{ textAlign: 'left' }}>
                 <Layout>
                     <Switch>
-                        <Route path={`${this.props.match.url}/checkout`} component={Checkout} />
-                        <Route path={`${this.props.match.url}/orders`} component={Orders} />
                         <Route path={`${this.props.match.url}/auth`} children={
                             <Auth parentPath={this.props.match.url} />
                         }/>
-                        <Route path={`${this.props.match.url}/logout`} children={
-                            <Logout parentPath={this.props.match.url} />
-                        }/>
+                        { this.props.isAuth && <Route path={`${this.props.match.url}/checkout`} component={Checkout} /> }
+                        { this.props.isAuth && <Route path={`${this.props.match.url}/orders`} component={Orders} />}
+                        { this.props.isAuth &&
+                            <Route path={`${this.props.match.url}/logout`} children={
+                                <Logout parentPath={this.props.match.url} />
+                            }/>
+                        }
                         <Route path={this.props.match.url} exact component={Builder} />
+                        { !this.props.isAuth && <Redirect to={this.props.match.url} /> }
                     </Switch>
                 </Layout>
             </div>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.token !== null
     }
 }
 
@@ -42,4 +51,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(BurgerBuilder))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BurgerBuilder))
