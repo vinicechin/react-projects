@@ -25,7 +25,7 @@ const purchaseSuccess = (state, action) => {
     return utils.updateObject(state, {
         loading: false,
         purchased: true,
-        orders: utils.updateObject(state.orders, action.order)
+        orders: utils.addToArray({ array: state.orders, value: action.order })
     })
 }
 

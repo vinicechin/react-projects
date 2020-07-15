@@ -22,9 +22,9 @@ const purchaseSent = () => {
     }
 }
 
-export const purchaseBurger = (order, token) => {
+export const purchaseBurger = (order, token, userId) => {
     return dispatch => {
-        axios.post(`/orders.json?auth=${token}`, order)
+        axios.post(`/users/${userId}/orders.json?auth=${token}`, order)
             .then( response => {
                 dispatch(purchaseSuccess(response.data.name, order))
             })
@@ -63,17 +63,23 @@ const fetchOrdersSent = () => {
     }
 }
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
+    if (token === null) {
+        token = localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)
+        userId = localStorage.getItem(process.env.REACT_APP_USERID_KEY)
+    }
     return dispatch => {
-        axios.get(`/orders.json?auth=${token}`)
+        axios.get(`/users/${userId}/orders.json?auth=${token}`)
             .then( response => {
-                const orders = Object.keys(response.data)
-                    .map((key) => {
-                        return {
-                            id: key,
-                            ...response.data[key]
-                        }
-                    })
+                const orders = response.data
+                    ? Object.keys(response.data)
+                        .map((key) => {
+                            return {
+                                id: key,
+                                ...response.data[key]
+                            }
+                        })
+                    : []
                 dispatch(fetchOrdersSuccess(orders))
             })
             .catch( error => {
