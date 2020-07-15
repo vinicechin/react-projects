@@ -3,8 +3,6 @@ import React from 'react'
 import classes from './Order.module.css'
 
 const Order = (props) => {
-    console.log(props.ingredients)
-
     const ingredients = Object.keys(props.ingredients)
         .map(ingredient => {
             return <span className={classes.Ingredient} key={ingredient} >
