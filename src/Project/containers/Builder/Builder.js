@@ -8,7 +8,7 @@ import Modal from '../../components/UI/Modal/Modal'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import * as actionCreators from '../../store/actions'
 
-class Builder extends Component {
+export class Builder extends Component {
     state = {
         purchasing: false
     }
