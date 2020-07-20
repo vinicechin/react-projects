@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [Here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) you will find some information on how to perform common tasks.<br>
 
+[React Projects Page](http://vinicechin.github.io/react-projects) contains all the implementations described bellow.
+
 ## Sections
 
 Class sections can be found on /src/Sections/
