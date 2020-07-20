@@ -122,7 +122,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/react-projects">
         <div className={classes.App}>
           { this.renderHeaderNav() }
           
