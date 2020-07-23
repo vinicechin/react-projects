@@ -1,8 +1,13 @@
 import React from 'react'
 
+import User from '../../components/User'
+
 const AuthIndexPage = () => {
     return (
-        <div>The auth index page</div>
+        <div>
+            <h1>The auth index page</h1>
+            <User name="Vini" age={31} />
+        </div>
     )
 }
  
