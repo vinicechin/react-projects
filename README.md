@@ -6,3 +6,5 @@ For this branch, each bonus project that is not related to another will have a f
 The Projects are:
 
 * Webpack - Learn how webpack is configured and modified
+* NextJs - Learn the basics about NextJs
+* Animations - Learn how to create animations on react apps
