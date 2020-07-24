@@ -23,20 +23,27 @@ class App extends Component {
         <h1>React Animations</h1>
         <button className="Button" onClick={() => this.setState(prevState => ({ showBlock: !prevState.showBlock }))} >Toggle</button>
         <br/>
-        <Transition in={this.state.showBlock} timeout={300} mountOnEnter unmountOnExit >
+        <Transition in={this.state.showBlock} timeout={1000} mountOnEnter unmountOnExit >
           {state => (
             <div style={{
               backgroundColor: 'red',
               width: 100,
               height: 100,
               margin: 'auto',
-              transition: 'opacity 0.3s ease-out',
+              transition: 'opacity 1s ease-out',
               opacity: state === TransitionStatus.EXITING ? 0 : 1
             }} />
           )}
         </Transition>
-        {this.state.modalIsOpen && <Modal show={this.state.modalIsOpen} closed={this.setModal.bind(this, false)} />}
-        {this.state.modalIsOpen && <Backdrop show={this.state.modalIsOpen} />}
+        <Transition in={this.state.modalIsOpen} timeout={300} mountOnEnter unmountOnExit>
+          {state => (
+            <Modal
+              show={state}
+              closed={this.setModal.bind(this, false)}
+            />
+          )}
+        </Transition>
+        {this.state.modalIsOpen && <Backdrop show />}
         <button className="Button" onClick={this.setModal.bind(this, true)} >Open Modal</button>
         <h3>Animating Lists</h3>
         <List />
