@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+// alternative package for animations:
+// react-motion - emulate real world phisics,
+// react-move - more control over animations, for more complex cases,
+// react-router-transition - route animations
 import Transition from 'react-transition-group/Transition'
 import * as TransitionStatus from 'react-transition-group/Transition'
 
