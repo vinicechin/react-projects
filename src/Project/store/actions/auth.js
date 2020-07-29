@@ -29,17 +29,22 @@ export const setRedirectPath = (path) => {
     }
 }
 
-export const authLogout = () => {
+export const authLogoutStart = () => {
     return {
         type: actionTypes.AUTH_LOGOUT_START
     }
 }
 
+export const authLogout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
 const checkAuthTimeout = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(authLogout())
-        }, expirationTime)
+    return {
+        type: actionTypes.CHECK_AUTH_TIMEOUT,
+        expirationTime
     }
 }
 
@@ -53,10 +58,10 @@ export const authCheckState = () => {
                 dispatch(authSuccess(token, userId))
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()))
             } else {
-                dispatch(authLogout())
+                dispatch(authLogoutStart())
             }
         } else {
-            dispatch(authLogout())
+            dispatch(authLogoutStart())
         }
     }
 }
