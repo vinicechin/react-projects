@@ -30,11 +30,8 @@ export const setRedirectPath = (path) => {
 }
 
 export const authLogout = () => {
-    localStorage.removeItem(process.env.REACT_APP_TOKEN_KEY)
-    localStorage.removeItem(process.env.REACT_APP_USERID_KEY)
-    localStorage.removeItem(process.env.REACT_APP_EXPIRATION_DATE_KEY)
     return {
-        type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_LOGOUT_START
     }
 }
 
