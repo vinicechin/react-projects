@@ -64,6 +64,15 @@ export const authCheckState = () => {
     }
 }
 
+const updateData = (dispatch, idToken, localId, expiresIn) => {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+    localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, idToken)
+    localStorage.setItem(process.env.REACT_APP_USERID_KEY, localId)
+    localStorage.setItem(process.env.REACT_APP_EXPIRATION_DATE_KEY, expirationDate)
+    dispatch(authSuccess(idToken, localId))
+    dispatch(checkAuthTimeout(expiresIn * 1000))
+}
+
 export const auth = (email, password, isSignUp) => {
     const data = {
         email,
@@ -75,25 +84,27 @@ export const auth = (email, password, isSignUp) => {
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
 
     return dispatch => {
-        axios.post(url, data)
-            .then( response => {
-                let { localId, idToken, expiresIn } = response.data
-                const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
-                localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, idToken)
-                localStorage.setItem(process.env.REACT_APP_USERID_KEY, localId)
-                localStorage.setItem(process.env.REACT_APP_EXPIRATION_DATE_KEY, expirationDate)
-                dispatch(authSuccess(idToken, localId))
-                dispatch(checkAuthTimeout(expiresIn * 1000))
-            })
-            .catch( (error) => {
-                const err = error.response ?
-                    error.response.data.error :
-                    error.request ?
-                        error.request :
-                        error.message
-                console.log(err)
-                dispatch(authFail(err))
-            })
+        if (process.env.NODE_ENV === 'development') {
+            setTimeout(() => {
+                updateData(dispatch, 'burger-test-account', 'vini1', 3600)
+            }, 1000)
+        } else {
+            axios.post(url, data)
+                .then( response => {
+                    let { localId, idToken, expiresIn } = response.data
+                    updateData(dispatch, idToken, localId, expiresIn)
+                })
+                .catch( (error) => {
+                    const err = error.response ?
+                        error.response.data.error :
+                        error.request ?
+                            error.request :
+                            error.message
+                    console.log(err)
+                    dispatch(authFail(err))
+                })
+        }
+
 
         dispatch(authSent())
     }

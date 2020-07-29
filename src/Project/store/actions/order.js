@@ -24,14 +24,20 @@ const purchaseSent = () => {
 
 export const purchaseBurger = (order, token, userId) => {
     return dispatch => {
-        axios.post(`/users/${userId}/orders.json?auth=${token}`, order)
-            .then( response => {
-                dispatch(purchaseSuccess(response.data.name, order))
-            })
-            .catch( error => {
-                alert(error)
-                dispatch(purchaseFail(error))
-            })
+        if (process.env.NODE_ENV === 'development') {
+            setTimeout(() => {
+                dispatch(purchaseSuccess('order-2', order))
+            }, 1000)
+        } else {
+            axios.post(`/users/${userId}/orders.json?auth=${token}`, order)
+                .then( response => {
+                    dispatch(purchaseSuccess(response.data.name, order))
+                })
+                .catch( error => {
+                    alert(error)
+                    dispatch(purchaseFail(error))
+                })
+        }
         
         dispatch(purchaseSent())
     }
@@ -69,29 +75,52 @@ export const fetchOrders = (token, userId) => {
         userId = localStorage.getItem(process.env.REACT_APP_USERID_KEY)
     }
     return dispatch => {
-        axios.get(`/users/${userId}/orders.json?auth=${token}`)
-            .then( response => {
-                const orders = response.data
-                    ? Object.keys(response.data)
-                        .map((key) => {
-                            return {
-                                id: key,
-                                ...response.data[key]
-                            }
-                        })
-                    : []
+        if (process.env.NODE_ENV === 'development') {
+            setTimeout(() => {
+                const orders = [{
+                    id: 'order-1',
+                    contactInfo: {
+                        country: '',
+                        deliveryMethod: 'fastest',
+                        email: 'teste@teste.com',
+                        name: 'teste',
+                        street: 'teste 1'
+                    },
+                    ingredients: {
+                        bacon: 3,
+                        cheese: 2,
+                        meat: 2,
+                        salad: 1
+                    },
+                    price: 10
+                }]
                 dispatch(fetchOrdersSuccess(orders))
             })
-            .catch( error => {
-                alert(error)
-                const err = error.response ?
-                    error.response.data.error :
-                    error.request ?
-                        error.request :
-                        error.message
-                console.log(err)
-                dispatch(fetchOrdersFail(err))
-            })
+        } else {
+            axios.get(`/users/${userId}/orders.json?auth=${token}`)
+                .then( response => {
+                    const orders = response.data
+                        ? Object.keys(response.data)
+                            .map((key) => {
+                                return {
+                                    id: key,
+                                    ...response.data[key]
+                                }
+                            })
+                        : []
+                    dispatch(fetchOrdersSuccess(orders))
+                })
+                .catch( error => {
+                    alert(error)
+                    const err = error.response ?
+                        error.response.data.error :
+                        error.request ?
+                            error.request :
+                            error.message
+                    console.log(err)
+                    dispatch(fetchOrdersFail(err))
+                })
+        }
         
         dispatch(fetchOrdersSent())
     }
