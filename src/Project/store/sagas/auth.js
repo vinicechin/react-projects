@@ -1,7 +1,7 @@
 import { put, delay } from 'redux-saga/effects'
 import axios from 'axios'
 
-import * as actionCreators from '../actions/auth'
+import * as actionCreators from '../actions'
 
 export function* logoutSaga(action) {
     yield localStorage.removeItem(process.env.REACT_APP_TOKEN_KEY)
