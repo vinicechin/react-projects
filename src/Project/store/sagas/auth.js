@@ -16,15 +16,17 @@ export function* checkAuthTimeoutSaga(action) {
 }
 
 export function* authUserSaga(action) {
+    yield put(actionCreators.authSent())
+
     const data = {
         email: action.email,
         password: action.password,
         returnSecureToken: true
     }
     const url = action.isSignUp ?
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}` :
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
-
+    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}` :
+    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
+    
     if (process.env.NODE_ENV === 'development') {
         yield delay(1000)
         yield updateData('burger-test-account', 'vini1', 3600)
@@ -44,8 +46,6 @@ export function* authUserSaga(action) {
             yield put(actionCreators.authFail(err))
         }
     }
-
-    yield put(actionCreators.authSent())
 }
 
 function* updateData(idToken, localId, expiresIn) {

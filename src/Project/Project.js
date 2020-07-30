@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
 import reducer from './store/reducers'
-import { watchAuth, watchBuilder } from './store/sagas'
+import { watchAuth, watchBuilder, watchOrder } from './store/sagas'
 
 const composeEnhancers = process.env.NODE_ENV === 'development'
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -19,6 +19,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, sagaM
 
 sagaMiddleware.run(watchAuth)
 sagaMiddleware.run(watchBuilder)
+sagaMiddleware.run(watchOrder)
 
 class Project extends Component {
     render() {
