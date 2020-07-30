@@ -56,3 +56,19 @@ function* updateData(idToken, localId, expiresIn) {
     yield put(actionCreators.authSuccess(idToken, localId))
     yield put(actionCreators.checkAuthTimeout(expiresIn * 1000))
 }
+
+export function* authCheckStateSaga(action) {
+    const token = yield localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)
+    const userId = yield localStorage.getItem(process.env.REACT_APP_USERID_KEY)
+    if (token && userId) {
+        const expirationDate = yield new Date(localStorage.getItem(process.env.REACT_APP_EXPIRATION_DATE_KEY))
+        if (expirationDate > new Date()) {
+            yield put(actionCreators.authSuccess())
+            yield put(actionCreators.checkAuthTimeout(expirationDate.getTime() - new Date().getTime()))
+        } else {
+            yield put(actionCreators.authLogoutStart())
+        }
+    } else {
+        yield put(actionCreators.authLogoutStart())
+    }
+}

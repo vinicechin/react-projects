@@ -48,20 +48,8 @@ export const checkAuthTimeout = (expirationTime) => {
 }
 
 export const authCheckState = () => {
-    return dispatch => {
-        const token = localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)
-        const userId = localStorage.getItem(process.env.REACT_APP_USERID_KEY)
-        if (token && userId) {
-            const expirationDate = new Date(localStorage.getItem(process.env.REACT_APP_EXPIRATION_DATE_KEY))
-            if (expirationDate > new Date()) {
-                dispatch(authSuccess(token, userId))
-                dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()))
-            } else {
-                dispatch(authLogoutStart())
-            }
-        } else {
-            dispatch(authLogoutStart())
-        }
+    return {
+        type: actionTypes.CHECK_AUTH_STATE
     }
 }
 
