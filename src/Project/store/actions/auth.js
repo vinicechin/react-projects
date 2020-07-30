@@ -1,13 +1,12 @@
-import axios from 'axios'
 import * as actionTypes from './types'
 
-const authSent = () => {
+export const authSent = () => {
     return {
         type: actionTypes.AUTH_SENT
     }
 }
 
-const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token,
@@ -15,7 +14,7 @@ const authSuccess = (token, userId) => {
     }
 }
 
-const authFail = (error) => {
+export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
         error
@@ -41,7 +40,7 @@ export const authLogout = () => {
     }
 }
 
-const checkAuthTimeout = (expirationTime) => {
+export const checkAuthTimeout = (expirationTime) => {
     return {
         type: actionTypes.CHECK_AUTH_TIMEOUT,
         expirationTime
@@ -66,48 +65,11 @@ export const authCheckState = () => {
     }
 }
 
-const updateData = (dispatch, idToken, localId, expiresIn) => {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
-    localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, idToken)
-    localStorage.setItem(process.env.REACT_APP_USERID_KEY, localId)
-    localStorage.setItem(process.env.REACT_APP_EXPIRATION_DATE_KEY, expirationDate)
-    dispatch(authSuccess(idToken, localId))
-    dispatch(checkAuthTimeout(expiresIn * 1000))
-}
-
 export const auth = (email, password, isSignUp) => {
-    const data = {
+    return {
+        type: actionTypes.AUTH_START,
         email,
         password,
-        returnSecureToken: true
-    }
-    const url = isSignUp ?
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}` :
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`
-
-    return dispatch => {
-        if (process.env.NODE_ENV === 'development') {
-            setTimeout(() => {
-                updateData(dispatch, 'burger-test-account', 'vini1', 3600)
-            }, 1000)
-        } else {
-            axios.post(url, data)
-                .then( response => {
-                    let { localId, idToken, expiresIn } = response.data
-                    updateData(dispatch, idToken, localId, expiresIn)
-                })
-                .catch( (error) => {
-                    const err = error.response ?
-                        error.response.data.error :
-                        error.request ?
-                            error.request :
-                            error.message
-                    console.log(err)
-                    dispatch(authFail(err))
-                })
-        }
-
-
-        dispatch(authSent())
+        isSignUp
     }
 }
