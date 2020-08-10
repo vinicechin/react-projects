@@ -1,23 +1,19 @@
 {
   "files": {
-    "main.css": "/react-projects/static/css/main.9a52e8e6.chunk.css",
+    "main.css": "/react-projects/static/css/main.49c693cd.chunk.css",
     "main.js": "/react-projects/static/js/main.9b255012.chunk.js",
-    "main.js.map": "/react-projects/static/js/main.9b255012.chunk.js.map",
     "runtime-main.js": "/react-projects/static/js/runtime-main.10e694e7.js",
-    "runtime-main.js.map": "/react-projects/static/js/runtime-main.10e694e7.js.map",
     "static/js/2.ed2c32d6.chunk.js": "/react-projects/static/js/2.ed2c32d6.chunk.js",
-    "static/js/2.ed2c32d6.chunk.js.map": "/react-projects/static/js/2.ed2c32d6.chunk.js.map",
     "index.html": "/react-projects/index.html",
-    "precache-manifest.df33f350d5ed39bffa25f71b8d557f1c.js": "/react-projects/precache-manifest.df33f350d5ed39bffa25f71b8d557f1c.js",
+    "precache-manifest.35b6d5ef8f9288878851482fd6c44156.js": "/react-projects/precache-manifest.35b6d5ef8f9288878851482fd6c44156.js",
     "service-worker.js": "/react-projects/service-worker.js",
-    "static/css/main.9a52e8e6.chunk.css.map": "/react-projects/static/css/main.9a52e8e6.chunk.css.map",
     "static/js/2.ed2c32d6.chunk.js.LICENSE.txt": "/react-projects/static/js/2.ed2c32d6.chunk.js.LICENSE.txt",
     "static/media/burger-logo.png": "/react-projects/static/media/burger-logo.b8503d26.png"
   },
   "entrypoints": [
     "static/js/runtime-main.10e694e7.js",
     "static/js/2.ed2c32d6.chunk.js",
-    "static/css/main.9a52e8e6.chunk.css",
+    "static/css/main.49c693cd.chunk.css",
     "static/js/main.9b255012.chunk.js"
   ]
 }
